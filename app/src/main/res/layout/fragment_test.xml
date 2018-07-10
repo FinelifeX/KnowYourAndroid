@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TestActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textSize="@dimen/text_xxxlarge"
+            android:layout_marginTop="@dimen/margin_medium"
+            tools:text="1/10"/>
+
+        <TextView
+            android:id="@+id/tv_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_number"
+            android:textSize="@dimen/text_large"
+            android:layout_margin="@dimen/margin_medium"
+            tools:text="asfsdfadsfgasdgfsaaaaaaaaaaaaaaaaaaaaaaguesswhoislazydbaasjdhfkjvnkjfhqounpoevqpwotyqyxfsdfdsdgsdfhdgfhgfgadfsaddfsd"/>
+
+        <Button
+            android:id="@+id/btn_answer1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_below="@id/tv_question"
+            android:textAllCaps="false"
+            tools:text="test 123"/>
+
+        <Button
+            android:id="@+id/btn_answer2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_below="@id/btn_answer1"
+            android:textAllCaps="false"
+            tools:text="456 test"/>
+
+        <Button
+            android:id="@+id/btn_answer3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_below="@id/btn_answer2"
+            android:textAllCaps="false"
+            tools:text="789 test"/>
+
+        <Button
+            android:id="@+id/btn_answer4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_below="@id/btn_answer3"
+            android:textAllCaps="false"
+            tools:text="test 0 0 0"/>
+
+        <Button
+            android:id="@+id/btn_skip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_below="@id/btn_answer4"
+            android:layout_centerHorizontal="true"
+            android:textAllCaps="false"
+            tools:text="skip"/>
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>
