@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/method_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/text_large"
+        android:maxLines="2"
+        tools:text="performClick()" />
+
+    <View
+        android:id="@+id/divider_primary"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/method_name"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:id="@+id/expandable_container"
+        android:layout_below="@id/divider_primary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/method_descr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text_xsmall"
+            tools:text="Lorem ipsum vsyakoe takoe delo mnogo teksta pqfqwfojwfqonvqovnqnffnqwfnqvnqnwvnq kgkwegjmqkigmqkievqknevqlonvqlenvqnqvjqkklq" />
+
+        <View
+            android:id="@+id/divider_secondary"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
+    </LinearLayout>
+
+</RelativeLayout>
