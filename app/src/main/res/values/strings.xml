@@ -3,5 +3,16 @@
     <string name="exp">Exp:</string>
     <string name="lessons">Lessons:</string>
     <string name="leaders">Leaders</string>
+    <string name="title_activity_drawer">DrawerActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="user_avatar">Аватар пользователя</string>
+    <string name="nav_statistics">Статистика</string>
+    <string name="nav_themes">Список тем</string>
+    <string name="nav_methods">Справочник методов</string>
+    <string name="nav_about">О нас</string>
+    <string name="nav_settings">Настройки</string>
+    <string name="logout">Выйти</string>
     <string name="app_name_shown">Know your Android</string>
 </resources>
