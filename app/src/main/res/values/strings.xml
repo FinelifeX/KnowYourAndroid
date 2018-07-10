@@ -15,4 +15,5 @@
     <string name="nav_settings">Настройки</string>
     <string name="logout">Выйти</string>
     <string name="arrow">Стрелка переключения</string>
+    <string name="app_name_shown">Know your Android</string>
 </resources>
