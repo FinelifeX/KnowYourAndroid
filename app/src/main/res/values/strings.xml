@@ -16,4 +16,23 @@
     <string name="logout">Выйти</string>
     <string name="arrow">Стрелка переключения</string>
     <string name="app_name_shown">Know your Android</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Пароль</string>
+    <string name="action_sign_in_short">Войти</string>
+    <string name="title_sign_in">Войти</string>
+    <string name="btn_forgot_password">Забыли пароль?</string>
+    <string name="btn_sign_in">Войти</string>
+    <string name="or">или</string>
+    <string name="click_to_sign_up">Нажмите чтобы зарегистрировться</string>
+    <string name="error_empty_email">Заполните email!</string>
+    <string name="error_empty_password">Введите пароль</string>
+    <string name="error_short_password">Пароль слишком короткий!</string>
+    <string name="error_wrong_email">Email не корректный!</string>
+    <string name="btn_reset_password">Сбросить пароль</string>
+    <string name="enter_your_email_address">Введите ваш email</string>
+    <string name="reset_success">Пароль успешно сброшен!</string>
+    <string name="btn_sign_up">Зарегистрироваться</string>
+    <string name="prompt_username">Имя пользователя</string>
+    <string name="title_sign_up">Регистрация</string>
+    <string name="error_empty_username">Заполните имя пользователя!</string>
 </resources>
