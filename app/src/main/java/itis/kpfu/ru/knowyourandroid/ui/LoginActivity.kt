@@ -1,4 +1,4 @@
-package itis.kpfu.ru.knowyourandroid
+package itis.kpfu.ru.knowyourandroid.ui
 
 import android.app.Activity
 import android.content.Intent
@@ -11,6 +11,13 @@ import android.view.View
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.AuthUI.IdpConfig
 import com.google.firebase.auth.FirebaseAuth
+import itis.kpfu.ru.knowyourandroid.EMAIL
+import itis.kpfu.ru.knowyourandroid.EMAIL_REGEX
+import itis.kpfu.ru.knowyourandroid.R.layout
+import itis.kpfu.ru.knowyourandroid.R.string
+import itis.kpfu.ru.knowyourandroid.RC_GOOGLE
+import itis.kpfu.ru.knowyourandroid.UserProvider
+import itis.kpfu.ru.knowyourandroid.UserProviderOnCompleteListener
 import kotlinx.android.synthetic.main.activity_login.btn_sign_in
 import kotlinx.android.synthetic.main.activity_login.btn_sign_in_google
 import kotlinx.android.synthetic.main.activity_login.btn_sign_up
@@ -31,7 +38,7 @@ class LoginActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(layout.activity_login)
         initClickListeners()
         initTextListeners()
     }
@@ -61,19 +68,19 @@ class LoginActivity : Activity() {
             val password = et_password.text.toString()
 
             if (TextUtils.isEmpty(email)) {
-                it_email.error = getString(R.string.error_empty_email)
+                it_email.error = getString(string.error_empty_email)
                 return@setOnClickListener
             }
             if (TextUtils.isEmpty(password)) {
-                it_password.error = getString(R.string.error_empty_password)
+                it_password.error = getString(string.error_empty_password)
                 return@setOnClickListener
             }
             if (password.length < 6) {
-                it_password.error = getString(R.string.error_short_password)
+                it_password.error = getString(string.error_short_password)
                 return@setOnClickListener
             }
             if (!email.matches(EMAIL_REGEX.toRegex())) {
-                it_email.error = getString(R.string.error_wrong_email)
+                it_email.error = getString(string.error_wrong_email)
                 return@setOnClickListener
             }
             progress_bar.visibility = View.VISIBLE
@@ -129,7 +136,7 @@ class LoginActivity : Activity() {
     }
 
     private fun getUserStartDrawerActivity() {
-        UserProvider.getInstance()?.provideUser()?.addOnCompleteListener(object :
+        UserProvider.addOnCompleteListener(object :
                 UserProviderOnCompleteListener {
             override fun onComplete() {
                 val intent = Intent(this@LoginActivity, DrawerActivity::class.java)

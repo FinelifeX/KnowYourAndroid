@@ -1,4 +1,4 @@
-package itis.kpfu.ru.knowyourandroid
+package itis.kpfu.ru.knowyourandroid.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +9,11 @@ import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
 import com.google.firebase.auth.FirebaseAuth
+import itis.kpfu.ru.knowyourandroid.EMAIL_REGEX
+import itis.kpfu.ru.knowyourandroid.R.layout
+import itis.kpfu.ru.knowyourandroid.R.string
+import itis.kpfu.ru.knowyourandroid.User
+import itis.kpfu.ru.knowyourandroid.UserProvider
 import kotlinx.android.synthetic.main.activity_sign_up.btn_sign_up
 import kotlinx.android.synthetic.main.activity_sign_up.container
 import kotlinx.android.synthetic.main.activity_sign_up.et_email
@@ -23,7 +28,7 @@ class SignUpActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_up)
+        setContentView(layout.activity_sign_up)
         initClickListeners()
         initTextListeners()
     }
@@ -34,22 +39,22 @@ class SignUpActivity : AppCompatActivity() {
             val password = et_password.text.toString()
             val name = et_name.text.toString()
             if (TextUtils.isEmpty(email)) {
-                it_email.error = getString(R.string.error_empty_email)
+                it_email.error = getString(string.error_empty_email)
                 return@setOnClickListener
             }
             if (TextUtils.isEmpty(password)) {
-                it_password.error = getString(R.string.error_empty_password)
+                it_password.error = getString(string.error_empty_password)
                 return@setOnClickListener
             }
             if (TextUtils.isEmpty(name)) {
-                it_name.error = getString(R.string.error_empty_username)
+                it_name.error = getString(string.error_empty_username)
             }
             if (password.length < 6) {
-                it_password.error = getString(R.string.error_short_password)
+                it_password.error = getString(string.error_short_password)
                 return@setOnClickListener
             }
             if (!email.matches(EMAIL_REGEX.toRegex())) {
-                it_email.error = getString(R.string.error_wrong_email)
+                it_email.error = getString(string.error_wrong_email)
                 return@setOnClickListener
             }
 
@@ -60,7 +65,8 @@ class SignUpActivity : AppCompatActivity() {
 
                 if (it.isSuccessful) {
                     val uid = it.result.user.uid
-                    UserProvider.getInstance()?.createUser(User(uid, name, 0))
+                    UserProvider.createUser(
+                            User(uid, name, 0))
                     val intent = Intent(this, DrawerActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)
