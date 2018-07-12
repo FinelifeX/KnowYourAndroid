@@ -1,102 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".StatisticsActivity">
+    android:layout_height="wrap_content">
+
+    <ProgressBar
+        android:id="@+id/pb_level"
+        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_medium"
+        android:layout_toEndOf="@id/tv_level"
+        tools:progress="66" />
+
+    <TextView
+        android:id="@+id/tv_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_small"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/text_xxlarge"
+        tools:text="66" />
+
+    <TextView
+        android:id="@+id/tv_exp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pb_level"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:layout_toEndOf="@id/tv_level"
+        android:text="@string/exp"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/text_xxlarge" />
+
+    <TextView
+        android:id="@+id/tv_exp_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pb_level"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_toEndOf="@id/tv_exp"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/text_xxlarge"
+        tools:text="1000/2232" />
+
+    <TextView
+        android:id="@+id/tv_lessons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_exp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:text="@string/lessons"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/text_xxlarge" />
+
+    <ProgressBar
+        android:id="@+id/pb_lessons"
+        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_lessons"
+        android:layout_margin="@dimen/margin_medium"
+        tools:progress="66" />
+
+    <TextView
+        android:id="@+id/tv_lessons_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pb_lessons"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/text_xxlarge"
+        tools:text="10/22" />
+
+    <TextView
+        android:id="@+id/tv_leaders"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_lessons_num"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/margin_small"
+        android:text="@string/leaders"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/text_xxlarge" />
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_leaders">
 
-        <ProgressBar
-            android:id="@+id/pb_level"
-            android:layout_margin="@dimen/margin_medium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:progress="66"
-            android:layout_toEndOf="@id/tv_level"
-            style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"/>
-
-        <TextView
-            android:id="@+id/tv_level"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorBlack"
-            android:layout_marginTop="@dimen/margin_small"
-            android:layout_marginStart="@dimen/margin_medium"
-            android:textSize="@dimen/text_xxlarge"
-            tools:text="66"/>
-
-        <TextView
-            android:id="@+id/tv_exp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorBlack"
-            android:layout_below="@id/pb_level"
-            android:layout_toEndOf="@id/tv_level"
-            android:layout_marginStart="@dimen/margin_medium"
-            android:textSize="@dimen/text_xxlarge"
-            android:text="@string/exp"/>
-
-        <TextView
-            android:id="@+id/tv_exp_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorBlack"
-            android:layout_below="@id/pb_level"
-            android:layout_toEndOf="@id/tv_exp"
-            android:layout_marginStart="@dimen/margin_small"
-            android:textSize="@dimen/text_xxlarge"
-            tools:text="1000/2232"/>
-
-        <TextView
-            android:id="@+id/tv_lessons"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorBlack"
-            android:layout_below="@id/tv_exp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/margin_medium"
-            android:textSize="@dimen/text_xxlarge"
-            android:text="@string/lessons"/>
-
-        <ProgressBar
-            android:id="@+id/pb_lessons"
-            android:layout_margin="@dimen/margin_medium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_lessons"
-            tools:progress="66"
-            style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"/>
-
-        <TextView
-            android:id="@+id/tv_lessons_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorBlack"
-            android:layout_below="@id/pb_lessons"
-            android:layout_centerHorizontal="true"
-            android:textSize="@dimen/text_xxlarge"
-            tools:text="10/22"/>
-
-        <TextView
-            android:id="@+id/tv_leaders"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorBlack"
-            android:layout_below="@id/tv_lessons_num"
-            android:layout_centerHorizontal="true"
-            android:textSize="@dimen/text_xxlarge"
-            android:layout_marginTop="@dimen/margin_small"
-            android:text="@string/leaders"/>
-
-        <RelativeLayout
-            android:layout_below="@id/tv_leaders"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <include layout="@layout/fragment_list"/>
-        </RelativeLayout>
+        <include layout="@layout/fragment_list" />
     </RelativeLayout>
 
-</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>
