@@ -16,6 +16,7 @@ import itis.kpfu.ru.knowyourandroid.EMAIL_REGEX
 import itis.kpfu.ru.knowyourandroid.R.layout
 import itis.kpfu.ru.knowyourandroid.R.string
 import itis.kpfu.ru.knowyourandroid.RC_GOOGLE
+import itis.kpfu.ru.knowyourandroid.User
 import itis.kpfu.ru.knowyourandroid.UserProvider
 import itis.kpfu.ru.knowyourandroid.UserProviderOnCompleteListener
 import kotlinx.android.synthetic.main.activity_login.btn_sign_in
@@ -88,7 +89,12 @@ class LoginActivity : Activity() {
             auth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
 
                 if (it.isSuccessful) {
-                    getUserStartDrawerActivity()
+                    UserProvider.getInstance()?.provideUser()?.addOnCompleteListener(
+                            object : UserProviderOnCompleteListener {
+                        override fun onComplete() {
+                            startDrawerActivity()
+                        }
+                    })
                 } else {
                     Snackbar.make(
                             container,
@@ -130,19 +136,15 @@ class LoginActivity : Activity() {
         if (resultCode == Activity.RESULT_OK)
             when (requestCode) {
                 RC_GOOGLE -> {
-                    getUserStartDrawerActivity()
+                    UserProvider.getInstance()?.createUser(User(auth.uid, auth.currentUser?.displayName))
+                    startDrawerActivity()
                 }
             }
     }
 
-    private fun getUserStartDrawerActivity() {
-        UserProvider.addOnCompleteListener(object :
-                UserProviderOnCompleteListener {
-            override fun onComplete() {
-                val intent = Intent(this@LoginActivity, DrawerActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
-            }
-        })
+    private fun startDrawerActivity() {
+        val intent = Intent(this@LoginActivity, DrawerActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
     }
 }

@@ -67,7 +67,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             }
             id.nav_logout -> {
                 auth.signOut()
-                UserProvider.provideUser()?.clear()
+                UserProvider.getInstance()?.clear()
                 startLoginActivity()
             }
             id.nav_methods -> {
