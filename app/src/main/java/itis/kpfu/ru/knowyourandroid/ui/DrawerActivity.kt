@@ -1,5 +1,6 @@
 package itis.kpfu.ru.knowyourandroid.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
@@ -7,15 +8,19 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import com.google.firebase.auth.FirebaseAuth
 import itis.kpfu.ru.knowyourandroid.R
 import itis.kpfu.ru.knowyourandroid.R.id
 import itis.kpfu.ru.knowyourandroid.R.layout
 import itis.kpfu.ru.knowyourandroid.R.string
+import itis.kpfu.ru.knowyourandroid.UserProvider
 import kotlinx.android.synthetic.main.activity_drawer.drawer_layout
 import kotlinx.android.synthetic.main.activity_drawer.nav_view
 import kotlinx.android.synthetic.main.activity_drawer.toolbar
 
 class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    private var auth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +35,11 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         toggle.syncState()
         nav_view.setNavigationItemSelectedListener(this)
 
-        //TODO: проверка на наличие регистрации
+        //TODO: проверка через splash screen
+        if (auth.currentUser == null) {
+            startLoginActivity()
+        }
+
         if (savedInstanceState == null) {
             fragmentManager
                     .beginTransaction()
@@ -53,12 +62,13 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             id.nav_about -> {
                 AlertDialog.Builder(this)
                         .setView(this.layoutInflater.inflate(R.layout.dialog_about, null))
-                        .setPositiveButton("OK", { dialog, which ->
-                        })
+                        .setPositiveButton("OK") {dialog, which ->  }
                         .create().show()
             }
             id.nav_logout -> {
-                //TODO firebase
+                auth.signOut()
+                UserProvider.provideUser()?.clear()
+                startLoginActivity()
             }
             id.nav_methods -> {
                 toolbar.title = resources.getString(R.string.nav_methods)
@@ -87,5 +97,11 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         }
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun startLoginActivity() {
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
     }
 }

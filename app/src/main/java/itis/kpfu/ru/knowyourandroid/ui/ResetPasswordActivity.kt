@@ -1,4 +1,4 @@
-package itis.kpfu.ru.knowyourandroid
+package itis.kpfu.ru.knowyourandroid.ui
 
 import android.os.Bundle
 import android.support.design.widget.BaseTransientBottomBar.BaseCallback
@@ -10,6 +10,10 @@ import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
 import com.google.firebase.auth.FirebaseAuth
+import itis.kpfu.ru.knowyourandroid.EMAIL
+import itis.kpfu.ru.knowyourandroid.EMAIL_REGEX
+import itis.kpfu.ru.knowyourandroid.R.layout
+import itis.kpfu.ru.knowyourandroid.R.string
 import kotlinx.android.synthetic.main.activity_reset_password.btn_reset
 import kotlinx.android.synthetic.main.activity_reset_password.container
 import kotlinx.android.synthetic.main.activity_reset_password.et_email
@@ -20,7 +24,7 @@ class ResetPasswordActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_reset_password)
+        setContentView(layout.activity_reset_password)
         initClickListeners()
         initTextListeners()
 
@@ -35,18 +39,18 @@ class ResetPasswordActivity : AppCompatActivity() {
             val email = et_email.text.toString()
 
             if (TextUtils.isEmpty(email)) {
-                it_email.error = getString(R.string.error_empty_email)
+                it_email.error = getString(string.error_empty_email)
                 return@setOnClickListener
             }
             if (!email.matches(EMAIL_REGEX.toRegex())) {
-                it_email.error = getString(R.string.error_wrong_email)
+                it_email.error = getString(string.error_wrong_email)
                 return@setOnClickListener
             }
             progress_bar.visibility = View.VISIBLE
             FirebaseAuth.getInstance().sendPasswordResetEmail(email).addOnCompleteListener {
                 if (it.isSuccessful) {
                     progress_bar.visibility = View.GONE
-                    Snackbar.make(container, R.string.reset_success,
+                    Snackbar.make(container, string.reset_success,
                             LENGTH_LONG).addCallback(object : BaseCallback<Snackbar>() {
                         override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
                             finish()
