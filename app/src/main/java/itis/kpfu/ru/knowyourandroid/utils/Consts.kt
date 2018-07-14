@@ -1,4 +1,4 @@
-package itis.kpfu.ru.knowyourandroid
+package itis.kpfu.ru.knowyourandroid.utils
 
 /**
  * Created by Ilya Zakharchenko on 12.07.2018.

@@ -11,11 +11,11 @@ import android.view.View
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.AuthUI.IdpConfig
 import com.google.firebase.auth.FirebaseAuth
-import itis.kpfu.ru.knowyourandroid.EMAIL
-import itis.kpfu.ru.knowyourandroid.EMAIL_REGEX
+import itis.kpfu.ru.knowyourandroid.utils.EMAIL
+import itis.kpfu.ru.knowyourandroid.utils.EMAIL_REGEX
 import itis.kpfu.ru.knowyourandroid.R.layout
 import itis.kpfu.ru.knowyourandroid.R.string
-import itis.kpfu.ru.knowyourandroid.RC_GOOGLE
+import itis.kpfu.ru.knowyourandroid.utils.RC_GOOGLE
 import itis.kpfu.ru.knowyourandroid.UserProvider
 import itis.kpfu.ru.knowyourandroid.UserProviderOnCompleteListener
 import kotlinx.android.synthetic.main.activity_login.btn_sign_in

@@ -62,7 +62,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             id.nav_about -> {
                 AlertDialog.Builder(this)
                         .setView(this.layoutInflater.inflate(R.layout.dialog_about, null))
-                        .setPositiveButton("OK") {dialog, which ->  }
+                        .setPositiveButton("OK") { _, _ ->  }
                         .create().show()
             }
             id.nav_logout -> {
