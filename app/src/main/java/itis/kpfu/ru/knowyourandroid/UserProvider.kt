@@ -48,7 +48,7 @@ object UserProvider {
     }
 
     fun createUser(user: User) {
-        dbRef.child("users").child(uid).setValue(user)
+        dbRef.child("users").child(user.uid.toString()).setValue(user)
         this.user = user
     }
 

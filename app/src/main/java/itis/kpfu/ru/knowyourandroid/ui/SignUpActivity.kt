@@ -66,7 +66,7 @@ class SignUpActivity : AppCompatActivity() {
                 if (it.isSuccessful) {
                     val uid = it.result.user.uid
                     UserProvider.createUser(
-                            User(uid, name, 0))
+                            User(uid, name))
                     val intent = Intent(this, DrawerActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)
