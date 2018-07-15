@@ -1,4 +1,4 @@
-package itis.kpfu.ru.knowyourandroid
+package itis.kpfu.ru.knowyourandroid.model
 
 import com.google.firebase.database.Exclude
 import com.google.firebase.database.IgnoreExtraProperties

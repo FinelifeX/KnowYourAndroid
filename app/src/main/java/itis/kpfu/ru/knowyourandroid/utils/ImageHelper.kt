@@ -1,4 +1,4 @@
-package itis.kpfu.ru.knowyourandroid
+package itis.kpfu.ru.knowyourandroid.utils
 
 import android.R.attr
 import android.graphics.Bitmap

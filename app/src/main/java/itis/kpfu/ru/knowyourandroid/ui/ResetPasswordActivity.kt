@@ -10,8 +10,8 @@ import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
 import com.google.firebase.auth.FirebaseAuth
-import itis.kpfu.ru.knowyourandroid.EMAIL
-import itis.kpfu.ru.knowyourandroid.EMAIL_REGEX
+import itis.kpfu.ru.knowyourandroid.utils.EMAIL
+import itis.kpfu.ru.knowyourandroid.utils.EMAIL_REGEX
 import itis.kpfu.ru.knowyourandroid.R.layout
 import itis.kpfu.ru.knowyourandroid.R.string
 import kotlinx.android.synthetic.main.activity_reset_password.btn_reset
