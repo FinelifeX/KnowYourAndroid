@@ -6,8 +6,8 @@ import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import com.arellomobile.mvp.MvpAppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import itis.kpfu.ru.knowyourandroid.R
 import itis.kpfu.ru.knowyourandroid.R.id
@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_drawer.drawer_layout
 import kotlinx.android.synthetic.main.activity_drawer.nav_view
 import kotlinx.android.synthetic.main.activity_drawer.toolbar
 
-class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class DrawerActivity : MvpAppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private var auth = FirebaseAuth.getInstance()
 
@@ -41,7 +41,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         }
 
         if (savedInstanceState == null) {
-            fragmentManager
+            supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.container, StatisticsFragment.newInstance())
                     .commit()
@@ -67,12 +67,12 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             }
             id.nav_logout -> {
                 auth.signOut()
-                UserProvider.provideUser()?.clear()
+                UserProvider.getInstance()?.clear()
                 startLoginActivity()
             }
             id.nav_methods -> {
                 toolbar.title = resources.getString(R.string.nav_methods)
-                fragmentManager
+                supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.container, MethodListFragment.newInstance())
                         .commit()
@@ -82,14 +82,14 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             }
             id.nav_stat -> {
                 toolbar.title = resources.getString(R.string.nav_statistics)
-                fragmentManager
+                supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.container, StatisticsFragment.newInstance())
                         .commit()
             }
             id.nav_themes -> {
                 toolbar.title = resources.getString(R.string.nav_themes)
-                fragmentManager
+                supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.container, ThemeListFragment.newInstance())
                         .commit()
