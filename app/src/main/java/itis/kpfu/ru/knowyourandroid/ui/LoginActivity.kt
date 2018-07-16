@@ -19,7 +19,7 @@ import itis.kpfu.ru.knowyourandroid.R.layout
 import itis.kpfu.ru.knowyourandroid.R.string
 import itis.kpfu.ru.knowyourandroid.utils.RC_GOOGLE
 import itis.kpfu.ru.knowyourandroid.model.User
-import itis.kpfu.ru.knowyourandroid.UserProvider
+import itis.kpfu.ru.knowyourandroid.model.providers.UserProvider
 import kotlinx.android.synthetic.main.activity_login.btn_sign_in
 import kotlinx.android.synthetic.main.activity_login.btn_sign_in_google
 import kotlinx.android.synthetic.main.activity_login.btn_sign_up

@@ -1,4 +1,4 @@
-package itis.kpfu.ru.knowyourandroid
+package itis.kpfu.ru.knowyourandroid.model.providers
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -43,7 +43,7 @@ object UserProvider {
 
     fun createUser(user: User) {
         dbRef.child("users").child(user.uid.toString()).setValue(user)
-        this.user = user
+        UserProvider.user = user
     }
 
     fun clear() {
