@@ -35,4 +35,5 @@
     <string name="prompt_username">Имя пользователя</string>
     <string name="title_sign_up">Регистрация</string>
     <string name="error_empty_username">Заполните имя пользователя!</string>
+    <string name="skip">Skip</string>
 </resources>

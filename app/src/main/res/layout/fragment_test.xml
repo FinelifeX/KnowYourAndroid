@@ -2,8 +2,7 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".TestActivity">
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -81,6 +80,6 @@
             android:layout_below="@id/btn_answer4"
             android:layout_centerHorizontal="true"
             android:textAllCaps="false"
-            tools:text="skip"/>
+            android:text="@string/skip"/>
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>
