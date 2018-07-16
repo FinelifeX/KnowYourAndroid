@@ -14,12 +14,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.auth.FirebaseAuth
 import itis.kpfu.ru.knowyourandroid.R
-import itis.kpfu.ru.knowyourandroid.R.id
-import itis.kpfu.ru.knowyourandroid.R.id.nav_stat
-import itis.kpfu.ru.knowyourandroid.R.layout
-import itis.kpfu.ru.knowyourandroid.R.mipmap.ic_launcher
+import itis.kpfu.ru.knowyourandroid.R.id.*
+import itis.kpfu.ru.knowyourandroid.R.layout.*
+import itis.kpfu.ru.knowyourandroid.R.mipmap.*
 import itis.kpfu.ru.knowyourandroid.R.string
-import itis.kpfu.ru.knowyourandroid.UserProvider
+import itis.kpfu.ru.knowyourandroid.model.providers.UserProvider
 import kotlinx.android.synthetic.main.activity_drawer.*
 import kotlinx.android.synthetic.main.nav_header_drawer.view.*
 
@@ -29,7 +28,7 @@ class DrawerActivity : MvpAppCompatActivity(), NavigationView.OnNavigationItemSe
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(layout.activity_drawer)
+        setContentView(activity_drawer)
         toolbar.title = resources.getString(R.string.nav_statistics)
         setSupportActionBar(toolbar)
 
@@ -67,35 +66,35 @@ class DrawerActivity : MvpAppCompatActivity(), NavigationView.OnNavigationItemSe
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            id.nav_about -> {
+            nav_about -> {
                 AlertDialog.Builder(this)
                         .setView(this.layoutInflater.inflate(R.layout.dialog_about, null))
                         .setPositiveButton("OK") { _, _ ->  }
                         .create().show()
             }
-            id.nav_logout -> {
+            nav_logout -> {
                 auth.signOut()
                 UserProvider.clear()
                 LoginActivity.start(this)
             }
-            id.nav_methods -> {
+            nav_methods -> {
                 toolbar.title = resources.getString(R.string.nav_methods)
                 supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.container, MethodListFragment.newInstance())
                         .commit()
             }
-            id.nav_settings -> {
+            nav_settings -> {
                 //TODO settings
             }
-            id.nav_stat -> {
+            nav_stat -> {
                 toolbar.title = resources.getString(R.string.nav_statistics)
                 supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.container, StatisticsFragment.newInstance())
                         .commit()
             }
-            id.nav_themes -> {
+            nav_themes -> {
                 toolbar.title = resources.getString(R.string.nav_themes)
                 supportFragmentManager
                         .beginTransaction()

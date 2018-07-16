@@ -8,7 +8,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import itis.kpfu.ru.knowyourandroid.R.layout.activity_splash
 import itis.kpfu.ru.knowyourandroid.R.mipmap.ic_launcher
-import itis.kpfu.ru.knowyourandroid.UserProvider
+import itis.kpfu.ru.knowyourandroid.model.providers.UserProvider
 import kotlinx.android.synthetic.main.activity_splash.app_icon
 
 class SplashActivity : AppCompatActivity() {
