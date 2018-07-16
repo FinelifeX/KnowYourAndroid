@@ -3,7 +3,6 @@ package itis.kpfu.ru.knowyourandroid.ui.lesson
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,7 +29,6 @@ class LessonFragment: MvpAppCompatFragment(), LessonView {
         const val THEME_NAME_TAG = "THEME_NAME"
 
         fun newInstance(lessonName: String, themeName: String): LessonFragment {
-            Log.d("LESSON", "newInstance")
             val fragment = LessonFragment()
             val bundle = Bundle()
             bundle.putString(LESSON_NAME_TAG, lessonName)
@@ -42,7 +40,6 @@ class LessonFragment: MvpAppCompatFragment(), LessonView {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?): View? {
-        Log.d("LESSON", "VIEW CREATED")
         val view = inflater.inflate(R.layout.fragment_lesson, container, false)
         lessonName = arguments?.getString(LESSON_NAME_TAG) ?: LESSON_NAME_TAG
         themeName = arguments?.getString(THEME_NAME_TAG) ?: THEME_NAME_TAG
@@ -51,7 +48,6 @@ class LessonFragment: MvpAppCompatFragment(), LessonView {
     }
 
     override fun initView(lesson: Lesson) {
-        Log.d("LESSON", "got info prom presenter")
         tv_lesson_content.text = lesson.text
         //TODO: работа с несколькими картинками
         if (lesson.imgReferences.isNotEmpty()){
