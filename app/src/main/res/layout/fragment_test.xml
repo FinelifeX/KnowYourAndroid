@@ -80,6 +80,6 @@
             android:layout_below="@id/btn_answer4"
             android:layout_centerHorizontal="true"
             android:textAllCaps="false"
-            tools:text="skip"/>
+            android:text="@string/skip"/>
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

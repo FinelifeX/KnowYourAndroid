@@ -1,6 +1,5 @@
 package itis.kpfu.ru.knowyourandroid.service
 
-import android.util.Log
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -19,17 +18,14 @@ class LessonService {
 
     fun getLesson(themeName: String, lessonName: String, lessonPresenter: LessonPresenter) {
         val databaseReference = database.getReference("$THEMES_REFERENCE/$themeName/$lessonName")
-        Log.d("LESSON", "getting info from firebase")
         databaseReference.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(p0: DataSnapshot) {
-                Log.d("LESSON", "success, sending info to repo")
                 RepositoryProvider.getLessonRepository().setLesson(p0.getValue(Lesson::class.java), lessonPresenter)
             }
 
             override fun onCancelled(p0: DatabaseError) {
                 TODO("not implemented")
-                Log.d("LESSON", "SOMETHING IS WRONG: ${p0.message}")
             }
         })
     }

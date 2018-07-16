@@ -24,6 +24,7 @@
         tools:text="akjffffffffffffffffffffffffffffffffffffffffaklfjaklfjalfjaljf"/>
 
     <Button
+        android:id="@+id/btn_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -31,6 +32,6 @@
         android:textColor="@android:color/white"
         android:padding="8dp"
         android:textSize="20sp"
-        android:text="Proceed to Test"
+        android:text="Back to list"
         android:layout_marginTop="12dp"/>
 </LinearLayout>
