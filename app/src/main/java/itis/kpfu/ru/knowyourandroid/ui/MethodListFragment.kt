@@ -1,13 +1,13 @@
 package itis.kpfu.ru.knowyourandroid.ui
 
-import android.app.Fragment
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.arellomobile.mvp.MvpAppCompatFragment
 import itis.kpfu.ru.knowyourandroid.R.layout
 
-class MethodListFragment : Fragment() {
+class MethodListFragment : MvpAppCompatFragment() {
 
     companion object {
 
@@ -16,8 +16,8 @@ class MethodListFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?): View? {
-        return inflater?.inflate(layout.fragment_list, container, false)
+        return inflater.inflate(layout.fragment_list, container, false)
     }
 }
