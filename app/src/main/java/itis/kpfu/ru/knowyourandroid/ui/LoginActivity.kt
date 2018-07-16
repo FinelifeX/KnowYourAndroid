@@ -1,9 +1,11 @@
 package itis.kpfu.ru.knowyourandroid.ui
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v4.content.ContextCompat.startActivity
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
@@ -18,7 +20,6 @@ import itis.kpfu.ru.knowyourandroid.R.string
 import itis.kpfu.ru.knowyourandroid.RC_GOOGLE
 import itis.kpfu.ru.knowyourandroid.User
 import itis.kpfu.ru.knowyourandroid.UserProvider
-import itis.kpfu.ru.knowyourandroid.UserProviderOnCompleteListener
 import kotlinx.android.synthetic.main.activity_login.btn_sign_in
 import kotlinx.android.synthetic.main.activity_login.btn_sign_in_google
 import kotlinx.android.synthetic.main.activity_login.btn_sign_up
@@ -42,6 +43,15 @@ class LoginActivity : Activity() {
         setContentView(layout.activity_login)
         initClickListeners()
         initTextListeners()
+    }
+
+    companion object {
+
+        fun start(context: Context) {
+            val intent = Intent(context, LoginActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(context, intent, null)
+        }
     }
 
     private fun initClickListeners() {
@@ -89,12 +99,9 @@ class LoginActivity : Activity() {
             auth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
 
                 if (it.isSuccessful) {
-                    UserProvider.getInstance()?.provideUser()?.addOnCompleteListener(
-                            object : UserProviderOnCompleteListener {
-                        override fun onComplete() {
-                            startDrawerActivity()
-                        }
-                    })
+                    UserProvider.provideUser().addOnCompleteListener {
+                        DrawerActivity.start(this)
+                    }
                 } else {
                     Snackbar.make(
                             container,
@@ -136,15 +143,11 @@ class LoginActivity : Activity() {
         if (resultCode == Activity.RESULT_OK)
             when (requestCode) {
                 RC_GOOGLE -> {
-                    UserProvider.getInstance()?.createUser(User(auth.uid, auth.currentUser?.displayName))
-                    startDrawerActivity()
+                    UserProvider.createUser(
+                            User(auth.uid, auth.currentUser?.displayName,
+                                    avatarUrl = auth.currentUser?.photoUrl.toString()))
+                    DrawerActivity.start(this)
                 }
             }
-    }
-
-    private fun startDrawerActivity() {
-        val intent = Intent(this@LoginActivity, DrawerActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
     }
 }

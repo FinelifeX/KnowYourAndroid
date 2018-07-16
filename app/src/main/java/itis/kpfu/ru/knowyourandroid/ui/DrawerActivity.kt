@@ -1,22 +1,27 @@
 package itis.kpfu.ru.knowyourandroid.ui
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
+import android.support.v4.content.ContextCompat
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.auth.FirebaseAuth
 import itis.kpfu.ru.knowyourandroid.R
 import itis.kpfu.ru.knowyourandroid.R.id
+import itis.kpfu.ru.knowyourandroid.R.id.nav_stat
 import itis.kpfu.ru.knowyourandroid.R.layout
+import itis.kpfu.ru.knowyourandroid.R.mipmap.ic_launcher
 import itis.kpfu.ru.knowyourandroid.R.string
 import itis.kpfu.ru.knowyourandroid.UserProvider
-import kotlinx.android.synthetic.main.activity_drawer.drawer_layout
-import kotlinx.android.synthetic.main.activity_drawer.nav_view
-import kotlinx.android.synthetic.main.activity_drawer.toolbar
+import kotlinx.android.synthetic.main.activity_drawer.*
+import kotlinx.android.synthetic.main.nav_header_drawer.view.*
 
 class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -35,16 +40,19 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         toggle.syncState()
         nav_view.setNavigationItemSelectedListener(this)
 
-        //TODO: проверка через splash screen
-        if (auth.currentUser == null) {
-            startLoginActivity()
+        if (savedInstanceState == null) {
+            onNavigationItemSelected(nav_view.menu.findItem(nav_stat))
         }
 
-        if (savedInstanceState == null) {
-            fragmentManager
-                    .beginTransaction()
-                    .replace(R.id.container, StatisticsFragment.newInstance())
-                    .commit()
+        fillHeader()
+    }
+
+    companion object {
+
+        fun start(context: Context) {
+            val intent = Intent(context, DrawerActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            ContextCompat.startActivity(context, intent, null)
         }
     }
 
@@ -62,13 +70,13 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             id.nav_about -> {
                 AlertDialog.Builder(this)
                         .setView(this.layoutInflater.inflate(R.layout.dialog_about, null))
-                        .setPositiveButton("OK") {dialog, which ->  }
+                        .setPositiveButton("OK") { dialog, which -> }
                         .create().show()
             }
             id.nav_logout -> {
                 auth.signOut()
-                UserProvider.getInstance()?.clear()
-                startLoginActivity()
+                UserProvider.clear()
+                LoginActivity.start(this)
             }
             id.nav_methods -> {
                 toolbar.title = resources.getString(R.string.nav_methods)
@@ -99,9 +107,15 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         return true
     }
 
-    private fun startLoginActivity() {
-        val intent = Intent(this, LoginActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
+    private fun fillHeader() {
+        val user = UserProvider.getCurrentUser()
+        val headerView = nav_view.getHeaderView(0)
+                Glide.with(applicationContext)
+                .load(user?.avatarUrl ?: ic_launcher)
+                .apply(RequestOptions().optionalCircleCrop())
+                .into(headerView.nav_image_avatar)
+
+        headerView.nav_header_username.text = user?.username
+        headerView.nav_header_level.text = user?.exp.toString()
     }
 }
