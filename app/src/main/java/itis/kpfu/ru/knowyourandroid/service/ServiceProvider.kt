@@ -1,28 +1,28 @@
 package itis.kpfu.ru.knowyourandroid.service
 
-import android.support.annotation.NonNull
+import itis.kpfu.ru.knowyourandroid.ui.statistics.StatisticsPresenter
 
 class ServiceProvider {
 
     companion object {
 
-        private var lessonService: LessonService = LessonService()
-        private var testService: TestService = TestService()
+        private var lessonService = LessonService()
+        private var testService = TestService()
+        private var statisticsService = StatisticsService()
 
-        @NonNull
         fun getLessonService(): LessonService {
-            if (lessonService == null) {
-                lessonService = LessonService()
-            }
             return lessonService
         }
 
-        @NonNull
         fun getTestService(): TestService {
-            if (testService == null) {
-                testService = TestService()
-            }
             return testService
         }
+
+        fun getStatisticsService(presenter: StatisticsPresenter): StatisticsService {
+            statisticsService.presenter = presenter
+            return statisticsService
+        }
+
+        fun getStatisticsService(): StatisticsService = statisticsService
     }
 }

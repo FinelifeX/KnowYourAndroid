@@ -57,6 +57,13 @@ class LessonFragment: MvpAppCompatFragment(), LessonView {
 
     override fun initView(lesson: Lesson) {
         tv_lesson_content.text = lesson.text
+        btn_back.setOnClickListener {
+            //TODO отметка о том, что этот урок пройден юзером + если урок последний, то переброс на тест
+            fragmentManager
+                    ?.beginTransaction()
+                    ?.replace(R.id.container, ThemeListFragment.newInstance())
+                    ?.commit()
+        }
         //TODO: работа с несколькими картинками
         if (lesson.imgReferences.isNotEmpty()){
             if (VERSION.SDK_INT >= VERSION_CODES.M) {

@@ -1,7 +1,6 @@
 package itis.kpfu.ru.knowyourandroid.ui.test
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -97,7 +96,7 @@ class TestFragment : MvpAppCompatFragment(), TestView {
     }
 
     private fun toNextQuestion() {
-        if (questionNumber + 1 != test.questionList.size){
+        if (questionNumber + 1 != test.questionList.size) {
             questionNumber++
             val number = "${questionNumber + 1}/${test.questionList.size}"
             tv_number.text = number
@@ -107,8 +106,7 @@ class TestFragment : MvpAppCompatFragment(), TestView {
                 btn.text = test.questionList[questionNumber].answerList[i]
                 //TODO возможно придется перевешивать onClickListener'ы
             }
-        }
-        else {
+        } else {
             //TODO экран с результатом теста
             fragmentManager
                     ?.beginTransaction()

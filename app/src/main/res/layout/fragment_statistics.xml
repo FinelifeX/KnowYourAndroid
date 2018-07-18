@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ProgressBar
+    <!--<ProgressBar
         android:id="@+id/pb_level"
         style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
@@ -21,35 +21,39 @@
         android:layout_marginTop="@dimen/margin_small"
         android:textColor="@color/colorBlack"
         android:textSize="@dimen/text_xxlarge"
-        tools:text="66" />
+        tools:text="66" />-->
 
-    <TextView
-        android:id="@+id/tv_exp"
+    <LinearLayout
+        android:id="@+id/exp_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/pb_level"
-        android:layout_marginStart="@dimen/margin_medium"
-        android:layout_toEndOf="@id/tv_level"
-        android:text="@string/exp"
-        android:textColor="@color/colorBlack"
-        android:textSize="@dimen/text_xxlarge" />
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/tv_exp_num"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/pb_level"
-        android:layout_marginStart="@dimen/margin_small"
-        android:layout_toEndOf="@id/tv_exp"
-        android:textColor="@color/colorBlack"
-        android:textSize="@dimen/text_xxlarge"
-        tools:text="1000/2232" />
+        <TextView
+            android:id="@+id/tv_exp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:text="@string/exp"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text_xxlarge" />
+
+        <TextView
+            android:id="@+id/tv_exp_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text_xxlarge"
+            tools:text="1000/2232" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tv_lessons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_exp"
+        android:layout_below="@id/exp_layout"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/margin_medium"
         android:text="@string/lessons"
@@ -86,12 +90,16 @@
         android:textColor="@color/colorBlack"
         android:textSize="@dimen/text_xxlarge" />
 
-    <RelativeLayout
+    <ProgressBar
+        android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_leaders">
+        android:layout_centerInParent="true" />
 
-        <include layout="@layout/fragment_list" />
-    </RelativeLayout>
-
+    <include
+        android:id="@+id/included_list"
+        layout="@layout/fragment_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tv_leaders" />
 </RelativeLayout>

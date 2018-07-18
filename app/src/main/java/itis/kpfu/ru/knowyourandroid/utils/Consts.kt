@@ -12,3 +12,5 @@ const val QUESTION_REFERENCE = "questions"
 
 const val LESSON_NAME_TAG = "LESSON_NAME"
 const val THEME_NAME_TAG = "THEME_NAME"
+
+const val LESSONS_NUM = 100

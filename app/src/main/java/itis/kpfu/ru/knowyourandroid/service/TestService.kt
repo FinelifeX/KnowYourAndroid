@@ -24,15 +24,15 @@ class TestService {
         databaseReference.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(p0: DataSnapshot) {
-                val test = p0.getValue() as ArrayList<*>
+                val test = p0.value as ArrayList<*>
                 val list: ArrayList<Question> = ArrayList()
                 for (testVal in test) {
                     Log.d("TEST", testVal.toString())
                     val hm = testVal as HashMap<*, *>
-                    val answerList = Arrays.asList(hm.get("answerList")).toString()
+                    val answerList = Arrays.asList(hm["answerList"]).toString()
                             .replace("[", "").replace("]", "")
                             .split(",").toTypedArray()
-                    list.add(Question(hm.get("text") as String, answerList))
+                    list.add(Question(hm["text"] as String, answerList))
                 }
                 RepositoryProvider.getTestRepository().setTest(Test(list), testPresenter)
             }
