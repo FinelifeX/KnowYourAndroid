@@ -45,6 +45,13 @@ class LessonFragment: MvpAppCompatFragment(), LessonView {
         lessonName = arguments?.getString(LESSON_NAME_TAG).toString()
         themeName = arguments?.getString(THEME_NAME_TAG).toString()
         this.activity?.toolbar?.title = lessonName
+        btn_back.setOnClickListener {
+            //TODO отметка о том, что этот урок пройден юзером + если урок последний, то переброс на тест
+            fragmentManager
+                    ?.beginTransaction()
+                    ?.replace(R.id.container, ThemeListFragment.newInstance())
+                    ?.commit()
+        }
         return view
     }
 
