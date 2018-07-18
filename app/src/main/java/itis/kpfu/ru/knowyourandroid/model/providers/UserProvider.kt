@@ -50,7 +50,5 @@ object UserProvider {
         user = null
     }
 
-    fun getCurrentUser(): User? {
-        return user
-    }
+    fun getCurrentUser(): User? = user
 }

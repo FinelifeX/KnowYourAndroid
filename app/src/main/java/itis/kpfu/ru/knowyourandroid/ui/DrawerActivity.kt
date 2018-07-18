@@ -19,6 +19,7 @@ import itis.kpfu.ru.knowyourandroid.R.layout.*
 import itis.kpfu.ru.knowyourandroid.R.mipmap.*
 import itis.kpfu.ru.knowyourandroid.R.string
 import itis.kpfu.ru.knowyourandroid.model.providers.UserProvider
+import itis.kpfu.ru.knowyourandroid.ui.statistics.StatisticsFragment
 import kotlinx.android.synthetic.main.activity_drawer.*
 import kotlinx.android.synthetic.main.nav_header_drawer.view.*
 

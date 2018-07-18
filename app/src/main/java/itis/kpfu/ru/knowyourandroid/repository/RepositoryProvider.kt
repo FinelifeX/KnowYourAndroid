@@ -1,19 +1,23 @@
 package itis.kpfu.ru.knowyourandroid.repository
 
-import android.support.annotation.NonNull
-
 class RepositoryProvider {
 
     companion object {
 
-        private var lessonRepository : LessonRepository = LessonRepository()
+        private var lessonRepository = LessonRepository()
+        private var testRepository = TestRepository()
+        private var statisticsRepository = StatisticsRepository()
 
-        @NonNull
-        fun getLessonRepository() : LessonRepository{
-            if (lessonRepository == null){
-                lessonRepository = LessonRepository()
-            }
+        fun getLessonRepository(): LessonRepository {
             return lessonRepository
+        }
+
+        fun getTestRepository(): TestRepository {
+            return testRepository
+        }
+
+        fun getStatisticsRepository(): StatisticsRepository {
+            return statisticsRepository
         }
     }
 }
