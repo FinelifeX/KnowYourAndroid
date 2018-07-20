@@ -21,7 +21,6 @@ class StatisticsRepository {
                         ValueEventListener {
 
                     override fun onCancelled(p0: DatabaseError) {
-                        TODO("not implemented")
                     }
 
                     override fun onDataChange(p0: DataSnapshot) {

@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.fragment_test.btn_answer2
 import kotlinx.android.synthetic.main.fragment_test.btn_answer3
 import kotlinx.android.synthetic.main.fragment_test.btn_answer4
 import kotlinx.android.synthetic.main.fragment_test.btn_skip
+import kotlinx.android.synthetic.main.fragment_test.progress_bar
 import kotlinx.android.synthetic.main.fragment_test.tv_number
 import kotlinx.android.synthetic.main.fragment_test.tv_question
 
@@ -74,6 +75,7 @@ class TestFragment : MvpAppCompatFragment(), TestView {
     }
 
     private fun initTest() {
+        onDataLoaded()
         val number = "${questionNumber + 1}/${test.questionList.size}"
         tv_number.text = number
         if (test.questionList.isNotEmpty()) {
@@ -113,5 +115,15 @@ class TestFragment : MvpAppCompatFragment(), TestView {
                     ?.replace(R.id.container, ThemeListFragment.newInstance())
                     ?.commit()
         }
+    }
+
+    private fun onDataLoaded(){
+        progress_bar.visibility = View.GONE
+        tv_number.visibility = View.VISIBLE
+        tv_question.visibility = View.VISIBLE
+        for (btn in buttonList){
+            btn.visibility = View.VISIBLE
+        }
+        btn_skip.visibility = View.VISIBLE
     }
 }

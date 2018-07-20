@@ -38,7 +38,6 @@ class TestService {
             }
 
             override fun onCancelled(p0: DatabaseError) {
-                TODO("not implemented")
             }
         })
     }

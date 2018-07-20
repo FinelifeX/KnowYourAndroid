@@ -1,5 +1,6 @@
 package itis.kpfu.ru.knowyourandroid.service
 
+import android.util.Log
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -21,11 +22,11 @@ class LessonService {
         databaseReference.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(p0: DataSnapshot) {
-                RepositoryProvider.getLessonRepository().setLesson(p0.getValue(Lesson::class.java), lessonPresenter)
+                val lesson = p0.getValue(Lesson::class.java)
+                RepositoryProvider.getLessonRepository().setLesson(lesson, lessonPresenter)
             }
 
             override fun onCancelled(p0: DatabaseError) {
-                TODO("not implemented")
             }
         })
     }
