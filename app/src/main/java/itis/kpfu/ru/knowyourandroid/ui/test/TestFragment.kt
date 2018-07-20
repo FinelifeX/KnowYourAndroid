@@ -77,51 +77,38 @@ class TestFragment : MvpAppCompatFragment(), TestView {
 
     private fun initTest() {
         onDataLoaded()
-        val number = "${questionNumber + 1}/${test.questionList.size}"
-        tv_number.text = number
-        if (test.questionList.isNotEmpty()) {
-            tv_question.text = test.questionList[questionNumber].text
-            val answerList = test.questionList[questionNumber].answerList.asList().shuffled()
-            for ((i, btn) in buttonList.withIndex()) {
-                //TODO сделать так чтобы не только в начале был правильный ответ
-                btn.text = answerList[i].text
-                btn.setOnClickListener {
-                    if (answerList[i].correct) {
-                        //TODO плюс баллы
-                    } else {
-                        //TODO минус баллы
-                    }
-                    toNextQuestion()
-                }
-            }
-        }
+        setQuestionData()
     }
 
     private fun toNextQuestion() {
-        val questionList = test.questionList
-        if (questionNumber + 1 != questionList.size) {
+        if (questionNumber + 1 != test.questionList.size) {
             questionNumber++
-            val number = "${questionNumber + 1}/${questionList.size}"
-            tv_number.text = number
-            tv_question.text = questionList[questionNumber].text
-            val answerList = questionList[questionNumber].answerList.asList().shuffled()
-            for ((i, btn) in buttonList.withIndex()) {
-                btn.text = answerList[i].text
-                btn.setOnClickListener {
-                    if (answerList[i].correct) {
-                        //TODO плюс баллы
-                    } else {
-                        //TODO минус баллы
-                    }
-                    toNextQuestion()
-                }
-            }
+            setQuestionData()
         } else {
             //TODO экран с результатом теста
+            //TODO отметка о том, что тест пройден
             fragmentManager
                     ?.beginTransaction()
                     ?.replace(R.id.container, ThemeListFragment.newInstance())
                     ?.commit()
+        }
+    }
+
+    private fun setQuestionData(){
+        val number = "${questionNumber + 1}/${test.questionList.size}"
+        tv_number.text = number
+        tv_question.text = test.questionList[questionNumber].text
+        val answerList = test.questionList[questionNumber].answerList.asList().shuffled()
+        for ((i, btn) in buttonList.withIndex()) {
+            btn.text = answerList[i].text
+            btn.setOnClickListener {
+                if (answerList[i].correct) {
+                    //TODO плюс баллы
+                } else {
+                    //TODO минус баллы
+                }
+                toNextQuestion()
+            }
         }
     }
 
