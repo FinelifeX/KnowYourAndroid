@@ -1,6 +1,7 @@
 package itis.kpfu.ru.knowyourandroid.ui.test
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -80,33 +81,40 @@ class TestFragment : MvpAppCompatFragment(), TestView {
         tv_number.text = number
         if (test.questionList.isNotEmpty()) {
             tv_question.text = test.questionList[questionNumber].text
-            buttonList[0].setOnClickListener {
-                //TODO плюс баллы
-                toNextQuestion()
-            }
+            val answerList = test.questionList[questionNumber].answerList.asList().shuffled()
             for ((i, btn) in buttonList.withIndex()) {
                 //TODO сделать так чтобы не только в начале был правильный ответ
-                btn.text = test.questionList[questionNumber].answerList[i]
-                if (i > 0) {
-                    btn.setOnClickListener {
+                btn.text = answerList[i].text
+                btn.setOnClickListener {
+                    if (answerList[i].correct) {
+                        //TODO плюс баллы
+                    } else {
                         //TODO минус баллы
-                        toNextQuestion()
                     }
+                    toNextQuestion()
                 }
             }
         }
     }
 
     private fun toNextQuestion() {
-        if (questionNumber + 1 != test.questionList.size) {
+        val questionList = test.questionList
+        if (questionNumber + 1 != questionList.size) {
             questionNumber++
-            val number = "${questionNumber + 1}/${test.questionList.size}"
+            val number = "${questionNumber + 1}/${questionList.size}"
             tv_number.text = number
-            tv_question.text = test.questionList[questionNumber].text
+            tv_question.text = questionList[questionNumber].text
+            val answerList = questionList[questionNumber].answerList.asList().shuffled()
             for ((i, btn) in buttonList.withIndex()) {
-                //TODO сделать так чтобы не только в начале был правильный ответ
-                btn.text = test.questionList[questionNumber].answerList[i]
-                //TODO возможно придется перевешивать onClickListener'ы
+                btn.text = answerList[i].text
+                btn.setOnClickListener {
+                    if (answerList[i].correct) {
+                        //TODO плюс баллы
+                    } else {
+                        //TODO минус баллы
+                    }
+                    toNextQuestion()
+                }
             }
         } else {
             //TODO экран с результатом теста
@@ -117,11 +125,11 @@ class TestFragment : MvpAppCompatFragment(), TestView {
         }
     }
 
-    private fun onDataLoaded(){
+    private fun onDataLoaded() {
         progress_bar.visibility = View.GONE
         tv_number.visibility = View.VISIBLE
         tv_question.visibility = View.VISIBLE
-        for (btn in buttonList){
+        for (btn in buttonList) {
             btn.visibility = View.VISIBLE
         }
         btn_skip.visibility = View.VISIBLE
