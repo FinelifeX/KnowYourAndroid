@@ -27,7 +27,8 @@ class LeadersAdapter constructor(var leaders: List<User?>) : RecyclerView.Adapte
     override fun getItemCount(): Int = leaders.size
 
     override fun onBindViewHolder(holder: LeadersViewHolder, position: Int) {
-        holder.itemView.tv_position.text = position.toString()
+        val pos = position + 1
+        holder.itemView.tv_position.text = pos.toString()
         holder.itemView.tv_name.text = leaders[position]?.username
         holder.itemView.tv_level.text = leaders[position]?.exp.toString()
     }

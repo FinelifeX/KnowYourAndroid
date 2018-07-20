@@ -12,6 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:src="@mipmap/ic_launcher"
+        android:visibility="invisible"
+        tools:visibility="visible"
         android:contentDescription="@string/lesson_image" />
 
     <TextView
@@ -20,6 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:textSize="30sp"
+        android:visibility="invisible"
+        tools:visibility="visible"
         android:textColor="@color/colorBlack"
         tools:text="akjffffffffffffffffffffffffffffffffffffffffaklfjaklfjalfjaljf"/>
 
@@ -32,6 +36,14 @@
         android:textColor="@android:color/white"
         android:padding="8dp"
         android:textSize="20sp"
-        android:text="Back to list"
+        android:text="@string/back_to_list"
+        android:visibility="invisible"
+        tools:visibility="visible"
         android:layout_marginTop="12dp"/>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
 </LinearLayout>

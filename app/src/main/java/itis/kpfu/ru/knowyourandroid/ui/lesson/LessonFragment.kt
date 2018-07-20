@@ -1,5 +1,6 @@
 package itis.kpfu.ru.knowyourandroid.ui.lesson
 
+import android.opengl.Visibility
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
@@ -17,6 +18,7 @@ import itis.kpfu.ru.knowyourandroid.utils.THEME_NAME_TAG
 import kotlinx.android.synthetic.main.activity_drawer.toolbar
 import kotlinx.android.synthetic.main.fragment_lesson.btn_back
 import kotlinx.android.synthetic.main.fragment_lesson.iv_lesson
+import kotlinx.android.synthetic.main.fragment_lesson.progress_bar
 import kotlinx.android.synthetic.main.fragment_lesson.tv_lesson_content
 
 class LessonFragment: MvpAppCompatFragment(), LessonView {
@@ -45,20 +47,14 @@ class LessonFragment: MvpAppCompatFragment(), LessonView {
         lessonName = arguments?.getString(LESSON_NAME_TAG).toString()
         themeName = arguments?.getString(THEME_NAME_TAG).toString()
         this.activity?.toolbar?.title = lessonName
-        btn_back.setOnClickListener {
-            //TODO отметка о том, что этот урок пройден юзером + если урок последний, то переброс на тест
-            fragmentManager
-                    ?.beginTransaction()
-                    ?.replace(R.id.container, ThemeListFragment.newInstance())
-                    ?.commit()
-        }
         return view
     }
 
     override fun initView(lesson: Lesson) {
-        tv_lesson_content.text = lesson.text
+        onDataLoaded()
+        tv_lesson_content.text = lesson.content
         btn_back.setOnClickListener {
-            //TODO отметка о том, что этот урок пройден юзером + если урок последний, то переброс на тест
+            //TODO отметка о том, что этот урок пройден юзером + если урок последний в теме, то переброс на тест
             fragmentManager
                     ?.beginTransaction()
                     ?.replace(R.id.container, ThemeListFragment.newInstance())
@@ -66,22 +62,20 @@ class LessonFragment: MvpAppCompatFragment(), LessonView {
         }
         //TODO: работа с несколькими картинками
         if (lesson.imgReferences.isNotEmpty()){
-            if (VERSION.SDK_INT >= VERSION_CODES.M) {
-                this.context?.let {
-                    Glide.with(it)
-                            .load(lesson.imgReferences[0])
-                            .into(iv_lesson)
-                }
-            }
-            else {
-                Glide.with(this)
-                        .load(lesson.imgReferences[0])
-                        .into(iv_lesson)
-            }
+            Glide.with(this)
+                    .load(lesson.imgReferences[0])
+                    .into(iv_lesson)
         }
     }
 
     override fun lessonData() {
         presenter.getLessonInfo(themeName, lessonName)
+    }
+
+    private fun onDataLoaded(){
+        progress_bar.visibility = View.GONE
+        tv_lesson_content.visibility = View.VISIBLE
+        btn_back.visibility = View.VISIBLE
+        iv_lesson.visibility = View.VISIBLE
     }
 }

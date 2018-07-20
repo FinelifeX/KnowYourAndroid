@@ -1,6 +1,7 @@
 package itis.kpfu.ru.knowyourandroid.ui.test
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,7 @@ import kotlinx.android.synthetic.main.fragment_test.btn_answer2
 import kotlinx.android.synthetic.main.fragment_test.btn_answer3
 import kotlinx.android.synthetic.main.fragment_test.btn_answer4
 import kotlinx.android.synthetic.main.fragment_test.btn_skip
+import kotlinx.android.synthetic.main.fragment_test.progress_bar
 import kotlinx.android.synthetic.main.fragment_test.tv_number
 import kotlinx.android.synthetic.main.fragment_test.tv_question
 
@@ -74,44 +76,49 @@ class TestFragment : MvpAppCompatFragment(), TestView {
     }
 
     private fun initTest() {
-        val number = "${questionNumber + 1}/${test.questionList.size}"
-        tv_number.text = number
-        if (test.questionList.isNotEmpty()) {
-            tv_question.text = test.questionList[questionNumber].text
-            buttonList[0].setOnClickListener {
-                //TODO плюс баллы
-                toNextQuestion()
-            }
-            for ((i, btn) in buttonList.withIndex()) {
-                //TODO сделать так чтобы не только в начале был правильный ответ
-                btn.text = test.questionList[questionNumber].answerList[i]
-                if (i > 0) {
-                    btn.setOnClickListener {
-                        //TODO минус баллы
-                        toNextQuestion()
-                    }
-                }
-            }
-        }
+        onDataLoaded()
+        setQuestionData()
     }
 
     private fun toNextQuestion() {
         if (questionNumber + 1 != test.questionList.size) {
             questionNumber++
-            val number = "${questionNumber + 1}/${test.questionList.size}"
-            tv_number.text = number
-            tv_question.text = test.questionList[questionNumber].text
-            for ((i, btn) in buttonList.withIndex()) {
-                //TODO сделать так чтобы не только в начале был правильный ответ
-                btn.text = test.questionList[questionNumber].answerList[i]
-                //TODO возможно придется перевешивать onClickListener'ы
-            }
+            setQuestionData()
         } else {
             //TODO экран с результатом теста
+            //TODO отметка о том, что тест пройден
             fragmentManager
                     ?.beginTransaction()
                     ?.replace(R.id.container, ThemeListFragment.newInstance())
                     ?.commit()
         }
+    }
+
+    private fun setQuestionData(){
+        val number = "${questionNumber + 1}/${test.questionList.size}"
+        tv_number.text = number
+        tv_question.text = test.questionList[questionNumber].text
+        val answerList = test.questionList[questionNumber].answerList.asList().shuffled()
+        for ((i, btn) in buttonList.withIndex()) {
+            btn.text = answerList[i].text
+            btn.setOnClickListener {
+                if (answerList[i].correct) {
+                    //TODO плюс баллы
+                } else {
+                    //TODO минус баллы
+                }
+                toNextQuestion()
+            }
+        }
+    }
+
+    private fun onDataLoaded() {
+        progress_bar.visibility = View.GONE
+        tv_number.visibility = View.VISIBLE
+        tv_question.visibility = View.VISIBLE
+        for (btn in buttonList) {
+            btn.visibility = View.VISIBLE
+        }
+        btn_skip.visibility = View.VISIBLE
     }
 }
