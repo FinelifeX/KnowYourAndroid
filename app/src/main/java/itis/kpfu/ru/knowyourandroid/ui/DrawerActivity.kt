@@ -14,24 +14,15 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.auth.FirebaseAuth
 import itis.kpfu.ru.knowyourandroid.R
-import itis.kpfu.ru.knowyourandroid.R.id.nav_about
-import itis.kpfu.ru.knowyourandroid.R.id.nav_logout
-import itis.kpfu.ru.knowyourandroid.R.id.nav_methods
-import itis.kpfu.ru.knowyourandroid.R.id.nav_settings
-import itis.kpfu.ru.knowyourandroid.R.id.nav_stat
-import itis.kpfu.ru.knowyourandroid.R.id.nav_themes
-import itis.kpfu.ru.knowyourandroid.R.layout.activity_drawer
-import itis.kpfu.ru.knowyourandroid.R.mipmap.ic_launcher
+import itis.kpfu.ru.knowyourandroid.R.id.*
+import itis.kpfu.ru.knowyourandroid.R.layout.*
+import itis.kpfu.ru.knowyourandroid.R.mipmap.*
 import itis.kpfu.ru.knowyourandroid.R.string
 import itis.kpfu.ru.knowyourandroid.model.providers.UserProvider
 import itis.kpfu.ru.knowyourandroid.ui.handbook.handbookClass.HandbookClassListFragment
 import itis.kpfu.ru.knowyourandroid.ui.statistics.StatisticsFragment
-import kotlinx.android.synthetic.main.activity_drawer.drawer_layout
-import kotlinx.android.synthetic.main.activity_drawer.nav_view
-import kotlinx.android.synthetic.main.activity_drawer.toolbar
-import kotlinx.android.synthetic.main.nav_header_drawer.view.nav_header_level
-import kotlinx.android.synthetic.main.nav_header_drawer.view.nav_header_username
-import kotlinx.android.synthetic.main.nav_header_drawer.view.nav_image_avatar
+import kotlinx.android.synthetic.main.activity_drawer.*
+import kotlinx.android.synthetic.main.nav_header_drawer.view.*
 
 class DrawerActivity : MvpAppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
