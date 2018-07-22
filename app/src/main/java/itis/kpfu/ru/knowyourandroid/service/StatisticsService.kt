@@ -8,14 +8,14 @@ import itis.kpfu.ru.knowyourandroid.ui.statistics.StatisticsPresenter
 /**
  * Created by Ilya Zakharchenko on 17.07.2018.
  */
-class StatisticsService constructor(private val repository: StatisticsRepository = RepositoryProvider
-        .getStatisticsRepository()) {
+object StatisticsService {
 
     lateinit var presenter: StatisticsPresenter
+    private val repository = StatisticsRepository
 
     fun loadLeaders() = repository.loadLeaders()
 
-    fun notifyDataLoaded(leaders: List<User?>){
-        presenter.notifyDataLoaded(leaders)
+    fun notifyDataLoaded(leaders: List<User?>) {
+        presenter.notifyDataLoaded(leaders.reversed())
     }
 }

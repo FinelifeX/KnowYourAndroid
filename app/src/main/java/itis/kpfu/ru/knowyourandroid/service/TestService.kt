@@ -39,7 +39,7 @@ class TestService {
                     }
                     list.add(Question(hm["text"] as String, answerList.toTypedArray()))
                 }
-                RepositoryProvider.getTestRepository().setTest(Test(list), testPresenter)
+                RepositoryProvider.getTestRepository().setTest(Test(list, themeName), testPresenter)
             }
 
             override fun onCancelled(p0: DatabaseError) {

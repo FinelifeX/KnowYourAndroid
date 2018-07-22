@@ -4,7 +4,7 @@ import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import itis.kpfu.ru.knowyourandroid.model.User
 import itis.kpfu.ru.knowyourandroid.model.providers.UserProvider
-import itis.kpfu.ru.knowyourandroid.service.ServiceProvider
+import itis.kpfu.ru.knowyourandroid.service.StatisticsService
 
 /**
  * Created by Ilya Zakharchenko on 17.07.2018.
@@ -12,10 +12,11 @@ import itis.kpfu.ru.knowyourandroid.service.ServiceProvider
 @InjectViewState
 class StatisticsPresenter : MvpPresenter<StatisticsView>() {
 
-    private val service = ServiceProvider.getStatisticsService(this)
+    private val service = StatisticsService
 
     fun init() {
         val user = UserProvider.getCurrentUser()
+        service.presenter = this
         viewState.setExp(user?.exp)
         viewState.setLessonProgress(user?.passedLessons?.size)
         viewState.changeLoadingState(true)
