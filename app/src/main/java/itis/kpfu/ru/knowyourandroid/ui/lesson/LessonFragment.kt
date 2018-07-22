@@ -11,6 +11,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.bumptech.glide.Glide
 import itis.kpfu.ru.knowyourandroid.R
 import itis.kpfu.ru.knowyourandroid.model.Lesson
+import itis.kpfu.ru.knowyourandroid.model.providers.UserProvider
 import itis.kpfu.ru.knowyourandroid.ui.ThemeListFragment
 import itis.kpfu.ru.knowyourandroid.utils.LESSON_NAME_TAG
 import itis.kpfu.ru.knowyourandroid.utils.THEME_NAME_TAG
@@ -23,6 +24,8 @@ class LessonFragment: MvpAppCompatFragment(), LessonView {
 
     private lateinit var lessonName: String
     private lateinit var themeName: String
+
+    private val user = UserProvider.getCurrentUser()
 
     @InjectPresenter
     lateinit var presenter : LessonPresenter
@@ -47,6 +50,10 @@ class LessonFragment: MvpAppCompatFragment(), LessonView {
         this.activity?.toolbar?.title = lessonName
         btn_back.setOnClickListener {
             //TODO отметка о том, что этот урок пройден юзером + если урок последний, то переброс на тест
+            user?.let {
+                if (!user.passedLessons.contains(lessonName)) user.passedLessons.add(lessonName)
+                UserProvider.updateUser()
+            }
             fragmentManager
                     ?.beginTransaction()
                     ?.replace(R.id.container, ThemeListFragment.newInstance())
@@ -59,6 +66,10 @@ class LessonFragment: MvpAppCompatFragment(), LessonView {
         tv_lesson_content.text = lesson.text
         btn_back.setOnClickListener {
             //TODO отметка о том, что этот урок пройден юзером + если урок последний, то переброс на тест
+            user?.let {
+                if (!user.passedLessons.contains(lessonName)) user.passedLessons.add(lessonName)
+                UserProvider.updateUser()
+            }
             fragmentManager
                     ?.beginTransaction()
                     ?.replace(R.id.container, ThemeListFragment.newInstance())

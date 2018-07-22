@@ -5,23 +5,22 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import itis.kpfu.ru.knowyourandroid.model.User
-import itis.kpfu.ru.knowyourandroid.service.ServiceProvider
+import itis.kpfu.ru.knowyourandroid.service.StatisticsService
 
 /**
  * Created by Ilya Zakharchenko on 17.07.2018.
  */
-class StatisticsRepository {
+object StatisticsRepository {
 
     //TODO загрузка данных из локал бд
     fun loadLeaders() {
         val leaders = ArrayList<User?>()
-        val service = ServiceProvider.getStatisticsService()
+        val service = StatisticsService
         FirebaseDatabase.getInstance().reference.child("users").orderByChild("exp").limitToFirst(10)
                 .addValueEventListener(object :
                         ValueEventListener {
 
                     override fun onCancelled(p0: DatabaseError) {
-                        TODO("not implemented")
                     }
 
                     override fun onDataChange(p0: DataSnapshot) {

@@ -7,14 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
-import itis.kpfu.ru.knowyourandroid.LeadersAdapter
 import itis.kpfu.ru.knowyourandroid.R.layout
 import itis.kpfu.ru.knowyourandroid.model.User
 import itis.kpfu.ru.knowyourandroid.utils.LESSONS_NUM
 import kotlinx.android.synthetic.main.fragment_list.rv_list
+import kotlinx.android.synthetic.main.fragment_list.view.progress_bar
+import kotlinx.android.synthetic.main.fragment_list.view.rv_list
 import kotlinx.android.synthetic.main.fragment_statistics.included_list
 import kotlinx.android.synthetic.main.fragment_statistics.pb_lessons
-import kotlinx.android.synthetic.main.fragment_statistics.progress_bar
 import kotlinx.android.synthetic.main.fragment_statistics.tv_exp_num
 import kotlinx.android.synthetic.main.fragment_statistics.tv_lessons_num
 
@@ -26,6 +26,7 @@ class StatisticsFragment : MvpAppCompatFragment(), StatisticsView {
             return StatisticsFragment()
         }
     }
+
     @InjectPresenter
     lateinit var presenter: StatisticsPresenter
 
@@ -38,8 +39,7 @@ class StatisticsFragment : MvpAppCompatFragment(), StatisticsView {
     override fun setExp(exp: Int?) {
         if (exp == null) {
             tv_exp_num.text = "0"
-        }
-        else
+        } else
             tv_exp_num.text = exp.toString()
     }
 
@@ -47,8 +47,7 @@ class StatisticsFragment : MvpAppCompatFragment(), StatisticsView {
         if (progress == null) {
             pb_lessons.progress = 0
             tv_lessons_num.text = "0/$LESSONS_NUM"
-        }
-        else {
+        } else {
             pb_lessons.progress = progress / LESSONS_NUM
             tv_lessons_num.text = "$progress/$LESSONS_NUM"
         }
@@ -61,12 +60,11 @@ class StatisticsFragment : MvpAppCompatFragment(), StatisticsView {
 
     override fun changeLoadingState(isLoading: Boolean) {
         if (isLoading) {
-            included_list.visibility = View.GONE
-            progress_bar.visibility = View.VISIBLE
-        }
-        else {
-            included_list.visibility = View.VISIBLE
-            progress_bar.visibility = View.GONE
+            included_list.rv_list.visibility = View.GONE
+            included_list.progress_bar.visibility = View.VISIBLE
+        } else {
+            included_list.rv_list.visibility = View.VISIBLE
+            included_list.progress_bar.visibility = View.GONE
         }
     }
 }

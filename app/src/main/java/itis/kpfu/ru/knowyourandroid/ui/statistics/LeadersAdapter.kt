@@ -1,10 +1,10 @@
-package itis.kpfu.ru.knowyourandroid
+package itis.kpfu.ru.knowyourandroid.ui.statistics
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import itis.kpfu.ru.knowyourandroid.LeadersAdapter.LeadersViewHolder
+import itis.kpfu.ru.knowyourandroid.ui.statistics.LeadersAdapter.LeadersViewHolder
 import itis.kpfu.ru.knowyourandroid.R.layout.item_leadership_user
 import itis.kpfu.ru.knowyourandroid.model.User
 import kotlinx.android.synthetic.main.item_leadership_user.view.tv_level
@@ -27,7 +27,7 @@ class LeadersAdapter constructor(var leaders: List<User?>) : RecyclerView.Adapte
     override fun getItemCount(): Int = leaders.size
 
     override fun onBindViewHolder(holder: LeadersViewHolder, position: Int) {
-        holder.itemView.tv_position.text = position.toString()
+        holder.itemView.tv_position.text = (position + 1).toString()
         holder.itemView.tv_name.text = leaders[position]?.username
         holder.itemView.tv_level.text = leaders[position]?.exp.toString()
     }

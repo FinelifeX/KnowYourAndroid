@@ -14,8 +14,6 @@ object UserProvider {
 
     private var dbRef = FirebaseDatabase.getInstance().reference
 
-    private var uid = FirebaseAuth.getInstance().uid.toString()
-
     private lateinit var listener: () -> Unit
 
     fun addOnCompleteListener(listenerImpl: () -> Unit) {
@@ -25,6 +23,7 @@ object UserProvider {
     private var user: User? = null
 
     fun provideUser(): UserProvider {
+        val uid = FirebaseAuth.getInstance().uid.toString()
         when (user) {
             null -> dbRef.child("users").child(uid).addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -43,7 +42,7 @@ object UserProvider {
 
     fun createUser(user: User) {
         dbRef.child("users").child(user.uid.toString()).setValue(user)
-        UserProvider.user = user
+        this.user = user
     }
 
     fun clear() {
@@ -51,4 +50,8 @@ object UserProvider {
     }
 
     fun getCurrentUser(): User? = user
+
+    fun updateUser() {
+        dbRef.child("users").child(user?.uid.toString()).setValue(user)
+    }
 }

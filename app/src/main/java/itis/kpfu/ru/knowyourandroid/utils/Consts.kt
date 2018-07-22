@@ -12,5 +12,10 @@ const val QUESTION_REFERENCE = "questions"
 
 const val LESSON_NAME_TAG = "LESSON_NAME"
 const val THEME_NAME_TAG = "THEME_NAME"
+const val CLASS_POSITION_TAG = "CLASS_POSITION"
 
 const val LESSONS_NUM = 100
+
+const val POINTS_FOR_SKIP = -50
+const val POINTS_FOR_CORRECT = 100
+const val POINTS_FOR_INCORRECT = -100

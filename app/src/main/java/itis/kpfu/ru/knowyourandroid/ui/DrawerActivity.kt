@@ -14,14 +14,24 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.auth.FirebaseAuth
 import itis.kpfu.ru.knowyourandroid.R
-import itis.kpfu.ru.knowyourandroid.R.id.*
-import itis.kpfu.ru.knowyourandroid.R.layout.*
-import itis.kpfu.ru.knowyourandroid.R.mipmap.*
+import itis.kpfu.ru.knowyourandroid.R.id.nav_about
+import itis.kpfu.ru.knowyourandroid.R.id.nav_logout
+import itis.kpfu.ru.knowyourandroid.R.id.nav_methods
+import itis.kpfu.ru.knowyourandroid.R.id.nav_settings
+import itis.kpfu.ru.knowyourandroid.R.id.nav_stat
+import itis.kpfu.ru.knowyourandroid.R.id.nav_themes
+import itis.kpfu.ru.knowyourandroid.R.layout.activity_drawer
+import itis.kpfu.ru.knowyourandroid.R.mipmap.ic_launcher
 import itis.kpfu.ru.knowyourandroid.R.string
 import itis.kpfu.ru.knowyourandroid.model.providers.UserProvider
+import itis.kpfu.ru.knowyourandroid.ui.handbook.handbookClass.HandbookClassListFragment
 import itis.kpfu.ru.knowyourandroid.ui.statistics.StatisticsFragment
-import kotlinx.android.synthetic.main.activity_drawer.*
-import kotlinx.android.synthetic.main.nav_header_drawer.view.*
+import kotlinx.android.synthetic.main.activity_drawer.drawer_layout
+import kotlinx.android.synthetic.main.activity_drawer.nav_view
+import kotlinx.android.synthetic.main.activity_drawer.toolbar
+import kotlinx.android.synthetic.main.nav_header_drawer.view.nav_header_level
+import kotlinx.android.synthetic.main.nav_header_drawer.view.nav_header_username
+import kotlinx.android.synthetic.main.nav_header_drawer.view.nav_image_avatar
 
 class DrawerActivity : MvpAppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -70,7 +80,7 @@ class DrawerActivity : MvpAppCompatActivity(), NavigationView.OnNavigationItemSe
             nav_about -> {
                 AlertDialog.Builder(this)
                         .setView(this.layoutInflater.inflate(R.layout.dialog_about, null))
-                        .setPositiveButton("OK") { _, _ ->  }
+                        .setPositiveButton("OK") { _, _ -> }
                         .create().show()
             }
             nav_logout -> {
@@ -82,7 +92,7 @@ class DrawerActivity : MvpAppCompatActivity(), NavigationView.OnNavigationItemSe
                 toolbar.title = resources.getString(R.string.nav_methods)
                 supportFragmentManager
                         .beginTransaction()
-                        .replace(R.id.container, MethodListFragment.newInstance())
+                        .replace(R.id.container, HandbookClassListFragment.newInstance())
                         .commit()
             }
             nav_settings -> {
@@ -110,7 +120,7 @@ class DrawerActivity : MvpAppCompatActivity(), NavigationView.OnNavigationItemSe
     private fun fillHeader() {
         val user = UserProvider.getCurrentUser()
         val headerView = nav_view.getHeaderView(0)
-                Glide.with(applicationContext)
+        Glide.with(applicationContext)
                 .load(user?.avatarUrl ?: ic_launcher)
                 .apply(RequestOptions().optionalCircleCrop())
                 .into(headerView.nav_image_avatar)

@@ -18,7 +18,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(activity_splash)
         Glide.with(applicationContext)
                 .load(ic_launcher)
-                .apply(RequestOptions.centerCropTransform())
+                .apply(RequestOptions.circleCropTransform())
                 .into(app_icon)
 
         val user = FirebaseAuth.getInstance().currentUser

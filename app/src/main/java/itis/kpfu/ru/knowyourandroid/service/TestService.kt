@@ -34,11 +34,10 @@ class TestService {
                             .split(",").toTypedArray()
                     list.add(Question(hm["text"] as String, answerList))
                 }
-                RepositoryProvider.getTestRepository().setTest(Test(list), testPresenter)
+                RepositoryProvider.getTestRepository().setTest(Test(list, themeName), testPresenter)
             }
 
             override fun onCancelled(p0: DatabaseError) {
-                TODO("not implemented")
             }
         })
     }
