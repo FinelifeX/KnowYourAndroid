@@ -10,7 +10,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import itis.kpfu.ru.knowyourandroid.R
 import itis.kpfu.ru.knowyourandroid.model.Test
 import itis.kpfu.ru.knowyourandroid.model.providers.UserProvider
-import itis.kpfu.ru.knowyourandroid.ui.ThemeListFragment
+import itis.kpfu.ru.knowyourandroid.ui.theme.ThemeListFragment
 import itis.kpfu.ru.knowyourandroid.utils.POINTS_FOR_CORRECT
 import itis.kpfu.ru.knowyourandroid.utils.POINTS_FOR_INCORRECT
 import itis.kpfu.ru.knowyourandroid.utils.POINTS_FOR_SKIP

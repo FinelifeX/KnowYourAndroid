@@ -1,6 +1,7 @@
 package itis.kpfu.ru.knowyourandroid.ui.lesson
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,7 @@ import com.bumptech.glide.Glide
 import itis.kpfu.ru.knowyourandroid.R
 import itis.kpfu.ru.knowyourandroid.model.Lesson
 import itis.kpfu.ru.knowyourandroid.model.providers.UserProvider
-import itis.kpfu.ru.knowyourandroid.ui.ThemeListFragment
+import itis.kpfu.ru.knowyourandroid.ui.theme.ThemeListFragment
 import itis.kpfu.ru.knowyourandroid.utils.LESSON_NAME_TAG
 import itis.kpfu.ru.knowyourandroid.utils.THEME_NAME_TAG
 import kotlinx.android.synthetic.main.activity_drawer.toolbar
