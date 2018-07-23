@@ -18,6 +18,7 @@ import itis.kpfu.ru.knowyourandroid.R.id.*
 import itis.kpfu.ru.knowyourandroid.R.layout.*
 import itis.kpfu.ru.knowyourandroid.R.mipmap.*
 import itis.kpfu.ru.knowyourandroid.R.string
+import itis.kpfu.ru.knowyourandroid.ui.theme.ThemeListFragment
 import itis.kpfu.ru.knowyourandroid.model.providers.UserProvider
 import itis.kpfu.ru.knowyourandroid.ui.handbook.handbookClass.HandbookClassListFragment
 import itis.kpfu.ru.knowyourandroid.ui.statistics.StatisticsFragment

@@ -1,10 +1,7 @@
 package itis.kpfu.ru.knowyourandroid.service
 
 import android.util.Log
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import itis.kpfu.ru.knowyourandroid.model.Lesson
 import itis.kpfu.ru.knowyourandroid.repository.RepositoryProvider
 import itis.kpfu.ru.knowyourandroid.ui.lesson.LessonPresenter
@@ -27,6 +24,7 @@ class LessonService {
             }
 
             override fun onCancelled(p0: DatabaseError) {
+                Log.d("LESSON", "SOMETHING IS WRONG: ${p0.message}")
             }
         })
     }

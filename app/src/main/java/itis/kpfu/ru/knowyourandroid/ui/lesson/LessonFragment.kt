@@ -51,6 +51,8 @@ class LessonFragment: MvpAppCompatFragment(), LessonView {
     }
 
     override fun initView(lesson: Lesson) {
+        Log.d("LESSON", "got info prom presenter")
+        tv_lesson_content.text = lesson.content
         onDataLoaded()
         tv_lesson_content.text = lesson.content
         btn_back.setOnClickListener {
