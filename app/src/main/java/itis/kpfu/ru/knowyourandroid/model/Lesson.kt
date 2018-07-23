@@ -1,7 +1,8 @@
 package itis.kpfu.ru.knowyourandroid.model
 
-import com.google.firebase.database.PropertyName
+import io.realm.RealmList
+import io.realm.RealmObject
 
-data class Lesson(val name: String = "LessonName", val content: String = "LessonText",
-        val imgReferences: List<String> = java.util.ArrayList<String>())
+open class Lesson(var name: String = "LessonName", var content: String = "LessonText",
+        var imgReferences: RealmList<String> = RealmList()): RealmObject()
 

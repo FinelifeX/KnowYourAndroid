@@ -1,3 +1,5 @@
 package itis.kpfu.ru.knowyourandroid.model
 
-data class Answer(val text: String, val correct: Boolean)
+import io.realm.RealmObject
+
+open class Answer(var content: String = "Answer", var correct: Boolean = false) : RealmObject()

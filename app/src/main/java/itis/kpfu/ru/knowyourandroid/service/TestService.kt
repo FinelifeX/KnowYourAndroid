@@ -1,10 +1,10 @@
 package itis.kpfu.ru.knowyourandroid.service
 
-import android.util.Log
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import io.realm.RealmList
 import itis.kpfu.ru.knowyourandroid.model.Answer
 import itis.kpfu.ru.knowyourandroid.model.Question
 import itis.kpfu.ru.knowyourandroid.model.Test
@@ -25,21 +25,25 @@ class TestService {
         databaseReference.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(p0: DataSnapshot) {
-                val test = p0.value as ArrayList<*>
-                val list: ArrayList<Question> = ArrayList()
-                for (testVal in test) {
-                    Log.d("TEST", testVal.toString())
-                    val hm = testVal as HashMap<*, *>
-                    val answerStringList = Arrays.asList(hm["answerList"]).toString()
-                            .replace("[", "").replace("]", "")
-                            .split(",").toTypedArray()
-                    val answerList: ArrayList<Answer> = ArrayList()
-                    for ((i, answer) in answerStringList.withIndex()){
-                        answerList.add(Answer(answer, i == 0))
+                if (p0.value != null){
+                    val test = p0.value as ArrayList<*>
+                    val list: RealmList<Question> = RealmList()
+                    for (testVal in test) {
+                        val hm = testVal as HashMap<*, *>
+                        val answerStringList = Arrays.asList(hm["answerList"]).toString()
+                                .replace("[", "").replace("]", "")
+                                .split(",").toTypedArray()
+                        val answerList: RealmList<Answer> = RealmList()
+                        for ((i, answer) in answerStringList.withIndex()){
+                            answerList.add(Answer(answer, i == 0))
+                        }
+                        list.add(Question(hm["content"] as String, answerList))
                     }
-                    list.add(Question(hm["text"] as String, answerList.toTypedArray()))
+                    RepositoryProvider.getTestRepository().setTest(Test(themeName, list), testPresenter)
                 }
-                RepositoryProvider.getTestRepository().setTest(Test(list), testPresenter)
+                else {
+                    testPresenter.errorNoData()
+                }
             }
 
             override fun onCancelled(p0: DatabaseError) {

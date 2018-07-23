@@ -1,3 +1,8 @@
 package itis.kpfu.ru.knowyourandroid.model
 
-data class Question(val text : String, val answerList : Array<Answer>)
+import io.realm.RealmList
+import io.realm.RealmObject
+import java.util.Arrays
+
+open class Question(var content: String = "question content",
+        var answerList: RealmList<Answer> = RealmList()) : RealmObject()

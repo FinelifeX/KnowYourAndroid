@@ -6,6 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.arellomobile.mvp.MvpAppCompatFragment
 import itis.kpfu.ru.knowyourandroid.R
+import itis.kpfu.ru.knowyourandroid.ui.lesson.LessonFragment
+import itis.kpfu.ru.knowyourandroid.ui.test.TestFragment
+import kotlinx.android.synthetic.main.fragment_just_for_test.btn1
+import kotlinx.android.synthetic.main.fragment_just_for_test.btn2
 
 class ThemeListFragment : MvpAppCompatFragment() {
 
