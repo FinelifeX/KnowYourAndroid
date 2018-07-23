@@ -14,6 +14,7 @@ import itis.kpfu.ru.knowyourandroid.R.id
 import itis.kpfu.ru.knowyourandroid.R.layout
 import itis.kpfu.ru.knowyourandroid.R.string
 import itis.kpfu.ru.knowyourandroid.UserProvider
+import itis.kpfu.ru.knowyourandroid.ui.theme.ThemeListFragment
 import kotlinx.android.synthetic.main.activity_drawer.drawer_layout
 import kotlinx.android.synthetic.main.activity_drawer.nav_view
 import kotlinx.android.synthetic.main.activity_drawer.toolbar

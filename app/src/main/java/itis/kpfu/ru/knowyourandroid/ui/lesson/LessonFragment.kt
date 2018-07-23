@@ -52,7 +52,7 @@ class LessonFragment: MvpAppCompatFragment(), LessonView {
 
     override fun initView(lesson: Lesson) {
         Log.d("LESSON", "got info prom presenter")
-        tv_lesson_content.text = lesson.text
+        tv_lesson_content.text = lesson.content
         //TODO: работа с несколькими картинками
         if (lesson.imgReferences.isNotEmpty()){
             if (VERSION.SDK_INT >= VERSION_CODES.M) {
