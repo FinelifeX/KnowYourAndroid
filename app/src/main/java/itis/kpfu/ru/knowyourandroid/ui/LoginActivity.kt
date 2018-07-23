@@ -10,16 +10,18 @@ import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
+import android.view.WindowManager
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.AuthUI.IdpConfig
 import com.google.firebase.auth.FirebaseAuth
-import itis.kpfu.ru.knowyourandroid.utils.EMAIL
-import itis.kpfu.ru.knowyourandroid.utils.EMAIL_REGEX
 import itis.kpfu.ru.knowyourandroid.R.layout
 import itis.kpfu.ru.knowyourandroid.R.string
-import itis.kpfu.ru.knowyourandroid.utils.RC_GOOGLE
 import itis.kpfu.ru.knowyourandroid.model.User
 import itis.kpfu.ru.knowyourandroid.model.providers.UserProvider
+import itis.kpfu.ru.knowyourandroid.utils.EMAIL
+import itis.kpfu.ru.knowyourandroid.utils.EMAIL_REGEX
+import itis.kpfu.ru.knowyourandroid.utils.RC_GOOGLE
+import itis.kpfu.ru.knowyourandroid.utils.SoftKeyboardHelper
 import kotlinx.android.synthetic.main.activity_login.btn_sign_in
 import kotlinx.android.synthetic.main.activity_login.btn_sign_in_google
 import kotlinx.android.synthetic.main.activity_login.btn_sign_up
@@ -77,7 +79,7 @@ class LoginActivity : Activity() {
         btn_sign_in.setOnClickListener {
             val email = et_email.text.toString()
             val password = et_password.text.toString()
-
+            SoftKeyboardHelper.hideKeyboard(this, currentFocus)
             if (TextUtils.isEmpty(email)) {
                 it_email.error = getString(string.error_empty_email)
                 return@setOnClickListener
@@ -94,8 +96,7 @@ class LoginActivity : Activity() {
                 it_email.error = getString(string.error_wrong_email)
                 return@setOnClickListener
             }
-            progress_bar.visibility = View.VISIBLE
-            container.visibility = View.GONE
+            setLoadingState(true)
             auth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
 
                 if (it.isSuccessful) {
@@ -107,8 +108,7 @@ class LoginActivity : Activity() {
                             container,
                             it.exception?.message.toString(),
                             Snackbar.LENGTH_LONG).show()
-                    progress_bar.visibility = View.GONE
-                    container.visibility = View.VISIBLE
+                    setLoadingState(false)
                 }
             }
         }
@@ -143,11 +143,28 @@ class LoginActivity : Activity() {
         if (resultCode == Activity.RESULT_OK)
             when (requestCode) {
                 RC_GOOGLE -> {
-                    UserProvider.createUser(
-                            User(auth.uid, auth.currentUser?.displayName,
-                                    avatarUrl = auth.currentUser?.photoUrl.toString()))
-                    DrawerActivity.start(this)
+                    setLoadingState(true)
+                    UserProvider.provideUser().addOnCompleteListener {
+                        val user = UserProvider.getCurrentUser()
+                        if (user == null) {
+                            UserProvider.createUser(
+                                    User(auth.uid, auth.currentUser?.displayName,
+                                            avatarUrl = auth.currentUser?.photoUrl.toString()))
+                        }
+                        DrawerActivity.start(this@LoginActivity)
+                    }
+
                 }
             }
+    }
+
+    private fun setLoadingState(isLoading: Boolean) {
+        if (isLoading) {
+            progress_bar.visibility = View.VISIBLE
+            container.visibility = View.GONE
+        } else {
+            progress_bar.visibility = View.GONE
+            container.visibility = View.VISIBLE
+        }
     }
 }

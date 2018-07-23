@@ -6,7 +6,6 @@ class RepositoryProvider {
       
         private var lessonRepository = LessonRepository()
         private var testRepository = TestRepository()
-        private var statisticsRepository = StatisticsRepository()
 
         fun getLessonRepository(): LessonRepository {
             return lessonRepository
@@ -14,10 +13,6 @@ class RepositoryProvider {
 
         fun getTestRepository(): TestRepository {
             return testRepository
-        }
-
-        fun getStatisticsRepository(): StatisticsRepository {
-            return statisticsRepository
         }
     }
 }

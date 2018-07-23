@@ -18,7 +18,9 @@ import itis.kpfu.ru.knowyourandroid.R.id.*
 import itis.kpfu.ru.knowyourandroid.R.layout.*
 import itis.kpfu.ru.knowyourandroid.R.mipmap.*
 import itis.kpfu.ru.knowyourandroid.R.string
+import itis.kpfu.ru.knowyourandroid.ui.theme.ThemeListFragment
 import itis.kpfu.ru.knowyourandroid.model.providers.UserProvider
+import itis.kpfu.ru.knowyourandroid.ui.handbook.handbookClass.HandbookClassListFragment
 import itis.kpfu.ru.knowyourandroid.ui.statistics.StatisticsFragment
 import kotlinx.android.synthetic.main.activity_drawer.*
 import kotlinx.android.synthetic.main.nav_header_drawer.view.*
@@ -70,7 +72,7 @@ class DrawerActivity : MvpAppCompatActivity(), NavigationView.OnNavigationItemSe
             nav_about -> {
                 AlertDialog.Builder(this)
                         .setView(this.layoutInflater.inflate(R.layout.dialog_about, null))
-                        .setPositiveButton("OK") { _, _ ->  }
+                        .setPositiveButton("OK") { _, _ -> }
                         .create().show()
             }
             nav_logout -> {
@@ -82,7 +84,7 @@ class DrawerActivity : MvpAppCompatActivity(), NavigationView.OnNavigationItemSe
                 toolbar.title = resources.getString(R.string.nav_methods)
                 supportFragmentManager
                         .beginTransaction()
-                        .replace(R.id.container, MethodListFragment.newInstance())
+                        .replace(R.id.container, HandbookClassListFragment.newInstance())
                         .commit()
             }
             nav_settings -> {
@@ -110,7 +112,7 @@ class DrawerActivity : MvpAppCompatActivity(), NavigationView.OnNavigationItemSe
     private fun fillHeader() {
         val user = UserProvider.getCurrentUser()
         val headerView = nav_view.getHeaderView(0)
-                Glide.with(applicationContext)
+        Glide.with(applicationContext)
                 .load(user?.avatarUrl ?: ic_launcher)
                 .apply(RequestOptions().optionalCircleCrop())
                 .into(headerView.nav_image_avatar)

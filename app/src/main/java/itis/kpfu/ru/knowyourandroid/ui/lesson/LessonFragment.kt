@@ -1,8 +1,5 @@
 package itis.kpfu.ru.knowyourandroid.ui.lesson
 
-import android.opengl.Visibility
-import android.os.Build.VERSION
-import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +9,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.bumptech.glide.Glide
 import itis.kpfu.ru.knowyourandroid.R
 import itis.kpfu.ru.knowyourandroid.model.Lesson
+import itis.kpfu.ru.knowyourandroid.model.providers.UserProvider
 import itis.kpfu.ru.knowyourandroid.ui.ThemeListFragment
 import itis.kpfu.ru.knowyourandroid.utils.LESSON_NAME_TAG
 import itis.kpfu.ru.knowyourandroid.utils.THEME_NAME_TAG
@@ -25,6 +23,8 @@ class LessonFragment: MvpAppCompatFragment(), LessonView {
 
     private lateinit var lessonName: String
     private lateinit var themeName: String
+
+    private val user = UserProvider.getCurrentUser()
 
     @InjectPresenter
     lateinit var presenter : LessonPresenter
@@ -51,10 +51,16 @@ class LessonFragment: MvpAppCompatFragment(), LessonView {
     }
 
     override fun initView(lesson: Lesson) {
+        Log.d("LESSON", "got info prom presenter")
+        tv_lesson_content.text = lesson.content
         onDataLoaded()
         tv_lesson_content.text = lesson.content
         btn_back.setOnClickListener {
-            //TODO отметка о том, что этот урок пройден юзером + если урок последний в теме, то переброс на тест
+            //TODO отметка о том, что этот урок пройден юзером + если урок последний, то переброс на тест
+            user?.let {
+                if (!user.passedLessons.contains(lessonName)) user.passedLessons.add(lessonName)
+                UserProvider.updateUser()
+            }
             fragmentManager
                     ?.beginTransaction()
                     ?.replace(R.id.container, ThemeListFragment.newInstance())

@@ -10,7 +10,11 @@ import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import itis.kpfu.ru.knowyourandroid.R
 import itis.kpfu.ru.knowyourandroid.model.Test
+import itis.kpfu.ru.knowyourandroid.model.providers.UserProvider
 import itis.kpfu.ru.knowyourandroid.ui.ThemeListFragment
+import itis.kpfu.ru.knowyourandroid.utils.POINTS_FOR_CORRECT
+import itis.kpfu.ru.knowyourandroid.utils.POINTS_FOR_INCORRECT
+import itis.kpfu.ru.knowyourandroid.utils.POINTS_FOR_SKIP
 import itis.kpfu.ru.knowyourandroid.utils.THEME_NAME_TAG
 import kotlinx.android.synthetic.main.activity_drawer.toolbar
 import kotlinx.android.synthetic.main.fragment_test.btn_answer1
@@ -28,6 +32,8 @@ class TestFragment : MvpAppCompatFragment(), TestView {
     private var questionNumber: Int = 0
     private var buttonList: MutableList<Button> = ArrayList()
     private lateinit var test: Test
+    private val user = UserProvider.getCurrentUser()
+    private var earnedPoints = 0
 
     @InjectPresenter
     lateinit var presenter: TestPresenter
@@ -85,7 +91,12 @@ class TestFragment : MvpAppCompatFragment(), TestView {
             setQuestionData()
         } else {
             //TODO экран с результатом теста
-            //TODO отметка о том, что тест пройден
+            if (earnedPoints < 0) earnedPoints = 0
+            user?.let {
+                it.exp += earnedPoints
+                it.passedTests.add(test.title)
+                UserProvider.updateUser()
+            }
             fragmentManager
                     ?.beginTransaction()
                     ?.replace(R.id.container, ThemeListFragment.newInstance())
@@ -101,10 +112,10 @@ class TestFragment : MvpAppCompatFragment(), TestView {
         for ((i, btn) in buttonList.withIndex()) {
             btn.text = answerList?.get(i)?.content
             btn.setOnClickListener {
-                if (answerList?.get(i)?.correct == true) {
-                    //TODO плюс баллы
+                earnedPoints += if (answerList?.get(i)?.correct == true) {
+                    POINTS_FOR_CORRECT
                 } else {
-                    //TODO минус баллы
+                    POINTS_FOR_INCORRECT
                 }
                 toNextQuestion()
             }
@@ -114,7 +125,7 @@ class TestFragment : MvpAppCompatFragment(), TestView {
     private fun onDataLoaded() {
         initButtonList()
         btn_skip.setOnClickListener {
-            //TODO минус баллы
+            earnedPoints += POINTS_FOR_SKIP
             toNextQuestion()
         }
         progress_bar.visibility = View.GONE
