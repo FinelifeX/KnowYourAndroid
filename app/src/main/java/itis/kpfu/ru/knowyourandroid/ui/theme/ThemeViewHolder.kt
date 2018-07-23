@@ -6,6 +6,7 @@ import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder
 import kotlinx.android.synthetic.main.item_theme_view.view.*
 
 class ThemeViewHolder(itemView: View) : GroupViewHolder(itemView) {
+
     fun setThemeTitle(group: ExpandableGroup<*>) {
         itemView.tv_header_theme.text = group.title
     }

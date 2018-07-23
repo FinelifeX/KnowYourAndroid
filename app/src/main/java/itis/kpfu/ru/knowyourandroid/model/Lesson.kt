@@ -5,13 +5,17 @@ import android.os.Parcelable
 import io.realm.RealmList
 import io.realm.RealmObject
 
-open class Lesson(var name : String = "LessonName", var content : String = "LessonText",
-        var imgReferences: RealmList<String> = RealmList()): RealmObject(), Parcelable {
+open class Lesson(var name: String = "LessonName", var content: String = "LessonText",
+        var imgReferences: RealmList<String> = RealmList()) : RealmObject(), Parcelable {
 
     constructor(parcel: Parcel) : this(
             parcel.readString(),
-            parcel.readString(),
-            parcel.createStringArrayList()) {
+            parcel.readString()) {
+        val realmList: RealmList<String> = RealmList()
+        for (imgRef in parcel.createStringArrayList()) {
+            realmList.add(imgRef)
+        }
+        imgReferences = realmList
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

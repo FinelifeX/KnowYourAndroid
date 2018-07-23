@@ -7,7 +7,8 @@ import com.google.firebase.database.IgnoreExtraProperties
  * Created by Ilya Zakharchenko on 12.07.2018.
  */
 @IgnoreExtraProperties
-data class User(@Exclude var uid: String? = null, var username: String? = null, var
-avatarUrl: String? = null, var exp: Int = 0, var passedLessons: MutableList<String> = ArrayList(),
+data class User(@Exclude var uid: String? = null, var username: String? = null,
+        var avatarUrl: String? = null, var exp: Int = 0,
+        var passedLessons: MutableList<String> = ArrayList(),
         var passedTests: MutableList<String> = ArrayList()
 )

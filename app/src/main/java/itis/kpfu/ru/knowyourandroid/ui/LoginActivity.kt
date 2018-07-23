@@ -153,7 +153,6 @@ class LoginActivity : Activity() {
                         }
                         DrawerActivity.start(this@LoginActivity)
                     }
-
                 }
             }
     }

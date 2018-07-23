@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp"
     android:clickable="true"
-    android:focusable="true">
+    android:focusable="true"
+    android:orientation="vertical"
+    android:padding="8dp">
 
     <TextView
         android:id="@+id/tv_header_lesson"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lesson header"
-        android:maxLines="1"
         android:ellipsize="end"
+        android:maxLines="1"
         android:maxWidth="300dp"
-        android:textSize="20sp"
         android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/iv_header_lesson"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBaseline_toBaselineOf="@id/iv_header_lesson"/>
+        tools:text="Lesson header" />
 
     <ImageView
         android:id="@+id/iv_header_lesson"

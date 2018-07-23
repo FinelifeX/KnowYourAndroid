@@ -25,7 +25,7 @@ class TestService {
         databaseReference.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(p0: DataSnapshot) {
-                if (p0.value != null){
+                if (p0.value != null) {
                     val test = p0.value as ArrayList<*>
                     val list: RealmList<Question> = RealmList()
                     for (testVal in test) {
@@ -34,14 +34,13 @@ class TestService {
                                 .replace("[", "").replace("]", "")
                                 .split(",").toTypedArray()
                         val answerList: RealmList<Answer> = RealmList()
-                        for ((i, answer) in answerStringList.withIndex()){
+                        for ((i, answer) in answerStringList.withIndex()) {
                             answerList.add(Answer(answer, i == 0))
                         }
                         list.add(Question(hm["content"] as String, answerList))
                     }
                     RepositoryProvider.getTestRepository().setTest(Test(themeName, list), testPresenter)
-                }
-                else {
+                } else {
                     testPresenter.errorNoData()
                 }
             }

@@ -1,6 +1,5 @@
 package itis.kpfu.ru.knowyourandroid.ui.theme
 
-import android.app.Fragment
 import android.os.Bundle
 import android.support.v4.app.FragmentActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -9,7 +8,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.arellomobile.mvp.MvpAppCompatFragment
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -28,7 +26,7 @@ class ThemeListFragment : android.support.v4.app.Fragment() {
 
         val database = FirebaseDatabase.getInstance()
 
-        fun newInstance() : ThemeListFragment {
+        fun newInstance(): ThemeListFragment {
             return ThemeListFragment()
         }
     }

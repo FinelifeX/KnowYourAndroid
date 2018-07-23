@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:padding="12dp">
 
     <TextView
         android:id="@+id/tv_header_theme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Theme header"
-        android:maxLines="1"
         android:ellipsize="end"
+        android:maxLines="1"
         android:maxWidth="300dp"
-        android:textSize="30sp"
         android:textColor="@android:color/black"
+        android:textSize="30sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/iv_header_theme"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBaseline_toBaselineOf="@id/iv_header_theme"/>
+        tools:text="Theme header" />
 
     <ImageView
         android:id="@+id/iv_header_theme"
