@@ -1,24 +1,27 @@
 package itis.kpfu.ru.knowyourandroid.ui
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v4.content.ContextCompat.startActivity
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
+import android.view.WindowManager
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.AuthUI.IdpConfig
 import com.google.firebase.auth.FirebaseAuth
-import itis.kpfu.ru.knowyourandroid.utils.EMAIL
-import itis.kpfu.ru.knowyourandroid.utils.EMAIL_REGEX
 import itis.kpfu.ru.knowyourandroid.R.layout
 import itis.kpfu.ru.knowyourandroid.R.string
-import itis.kpfu.ru.knowyourandroid.utils.RC_GOOGLE
 import itis.kpfu.ru.knowyourandroid.model.User
-import itis.kpfu.ru.knowyourandroid.UserProvider
-import itis.kpfu.ru.knowyourandroid.UserProviderOnCompleteListener
+import itis.kpfu.ru.knowyourandroid.model.providers.UserProvider
+import itis.kpfu.ru.knowyourandroid.utils.EMAIL
+import itis.kpfu.ru.knowyourandroid.utils.EMAIL_REGEX
+import itis.kpfu.ru.knowyourandroid.utils.RC_GOOGLE
+import itis.kpfu.ru.knowyourandroid.utils.SoftKeyboardHelper
 import kotlinx.android.synthetic.main.activity_login.btn_sign_in
 import kotlinx.android.synthetic.main.activity_login.btn_sign_in_google
 import kotlinx.android.synthetic.main.activity_login.btn_sign_up
@@ -44,6 +47,15 @@ class LoginActivity : Activity() {
         initTextListeners()
     }
 
+    companion object {
+
+        fun start(context: Context) {
+            val intent = Intent(context, LoginActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(context, intent, null)
+        }
+    }
+
     private fun initClickListeners() {
         tv_reset_password.setOnClickListener {
             val email = et_email.text.toString()
@@ -67,7 +79,7 @@ class LoginActivity : Activity() {
         btn_sign_in.setOnClickListener {
             val email = et_email.text.toString()
             val password = et_password.text.toString()
-
+            SoftKeyboardHelper.hideKeyboard(this, currentFocus)
             if (TextUtils.isEmpty(email)) {
                 it_email.error = getString(string.error_empty_email)
                 return@setOnClickListener
@@ -84,24 +96,19 @@ class LoginActivity : Activity() {
                 it_email.error = getString(string.error_wrong_email)
                 return@setOnClickListener
             }
-            progress_bar.visibility = View.VISIBLE
-            container.visibility = View.GONE
+            setLoadingState(true)
             auth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
 
                 if (it.isSuccessful) {
-                    UserProvider.getInstance()?.provideUser()?.addOnCompleteListener(
-                            object : UserProviderOnCompleteListener {
-                        override fun onComplete() {
-                            startDrawerActivity()
-                        }
-                    })
+                    UserProvider.provideUser().addOnCompleteListener {
+                        DrawerActivity.start(this)
+                    }
                 } else {
                     Snackbar.make(
                             container,
                             it.exception?.message.toString(),
                             Snackbar.LENGTH_LONG).show()
-                    progress_bar.visibility = View.GONE
-                    container.visibility = View.VISIBLE
+                    setLoadingState(false)
                 }
             }
         }
@@ -136,15 +143,28 @@ class LoginActivity : Activity() {
         if (resultCode == Activity.RESULT_OK)
             when (requestCode) {
                 RC_GOOGLE -> {
-                    UserProvider.getInstance()?.createUser(User(auth.uid, auth.currentUser?.displayName))
-                    startDrawerActivity()
+                    setLoadingState(true)
+                    UserProvider.provideUser().addOnCompleteListener {
+                        val user = UserProvider.getCurrentUser()
+                        if (user == null) {
+                            UserProvider.createUser(
+                                    User(auth.uid, auth.currentUser?.displayName,
+                                            avatarUrl = auth.currentUser?.photoUrl.toString()))
+                        }
+                        DrawerActivity.start(this@LoginActivity)
+                    }
+
                 }
             }
     }
 
-    private fun startDrawerActivity() {
-        val intent = Intent(this@LoginActivity, DrawerActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
+    private fun setLoadingState(isLoading: Boolean) {
+        if (isLoading) {
+            progress_bar.visibility = View.VISIBLE
+            container.visibility = View.GONE
+        } else {
+            progress_bar.visibility = View.GONE
+            container.visibility = View.VISIBLE
+        }
     }
 }

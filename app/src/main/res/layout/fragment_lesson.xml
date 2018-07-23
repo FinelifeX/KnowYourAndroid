@@ -11,7 +11,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@mipmap/ic_launcher"
+        android:visibility="invisible"
+        tools:visibility="visible"
+        android:contentDescription="@string/lesson_image" />
 
     <TextView
         android:id="@+id/tv_lesson_content"
@@ -19,17 +22,28 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:textSize="30sp"
+        android:visibility="invisible"
+        tools:visibility="visible"
         android:textColor="@color/colorBlack"
         tools:text="akjffffffffffffffffffffffffffffffffffffffffaklfjaklfjalfjaljf"/>
 
     <Button
+        android:id="@+id/btn_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:background="@android:color/holo_green_light"
+        android:background="@color/green"
         android:textColor="@android:color/white"
         android:padding="8dp"
         android:textSize="20sp"
-        android:text="Proceed to Test"
+        android:text="@string/back_to_list"
+        android:visibility="invisible"
+        tools:visibility="visible"
         android:layout_marginTop="12dp"/>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
 </LinearLayout>

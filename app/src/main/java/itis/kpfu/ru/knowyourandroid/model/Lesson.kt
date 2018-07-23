@@ -34,4 +34,3 @@ List<String> = ArrayList<String>()) : Parcelable {
         }
     }
 }
-

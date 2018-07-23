@@ -16,12 +16,11 @@ class LessonService {
 
     fun getLesson(themeName: String, lessonName: String, lessonPresenter: LessonPresenter) {
         val databaseReference = database.getReference("$THEMES_REFERENCE/$themeName/$lessonName")
-        Log.d("LESSON", "getting info from firebase")
         databaseReference.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(p0: DataSnapshot) {
-                Log.d("LESSON", "success, sending info to repo")
-                RepositoryProvider.getLessonRepository().setLesson(p0.getValue(Lesson::class.java), lessonPresenter)
+                val lesson = p0.getValue(Lesson::class.java)
+                RepositoryProvider.getLessonRepository().setLesson(lesson, lessonPresenter)
             }
 
             override fun onCancelled(p0: DatabaseError) {

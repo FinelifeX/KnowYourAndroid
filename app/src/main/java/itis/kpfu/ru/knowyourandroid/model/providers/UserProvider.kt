@@ -1,4 +1,4 @@
-package itis.kpfu.ru.knowyourandroid
+package itis.kpfu.ru.knowyourandroid.model.providers
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -12,40 +12,32 @@ import itis.kpfu.ru.knowyourandroid.model.User
  */
 object UserProvider {
 
-    private val dbRef = FirebaseDatabase.getInstance().reference
+    private var dbRef = FirebaseDatabase.getInstance().reference
 
-    private val uid = FirebaseAuth.getInstance().uid.toString()
+    private lateinit var listener: () -> Unit
 
-    private var provider: UserProvider? = null
-
-    var listener: UserProviderOnCompleteListener? = null
-
-    fun addOnCompleteListener(listenerImpl: UserProviderOnCompleteListener) {
+    fun addOnCompleteListener(listenerImpl: () -> Unit) {
         listener = listenerImpl
     }
+
     private var user: User? = null
 
-    fun getInstance(): UserProvider? {
-        if (provider == null) {
-            provider = UserProvider
-        }
-        return provider
-    }
-
-    fun provideUser(): UserProvider? {
-        if (user == null) {
-            dbRef.child("users").child(uid).addListenerForSingleValueEvent(object : ValueEventListener {
+    fun provideUser(): UserProvider {
+        val uid = FirebaseAuth.getInstance().uid.toString()
+        when (user) {
+            null -> dbRef.child("users").child(uid).addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     user = dataSnapshot.getValue(User::class.java)
-                    listener?.onComplete()
+                    listener()
                 }
 
                 override fun onCancelled(error: DatabaseError) {
                     // Failed to read value
                 }
             })
+            else -> listener()
         }
-        return this.provider
+        return UserProvider
     }
 
     fun createUser(user: User) {
@@ -55,5 +47,11 @@ object UserProvider {
 
     fun clear() {
         user = null
+    }
+
+    fun getCurrentUser(): User? = user
+
+    fun updateUser() {
+        dbRef.child("users").child(user?.uid.toString()).setValue(user)
     }
 }

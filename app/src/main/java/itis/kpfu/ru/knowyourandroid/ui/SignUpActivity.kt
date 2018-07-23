@@ -13,7 +13,7 @@ import itis.kpfu.ru.knowyourandroid.utils.EMAIL_REGEX
 import itis.kpfu.ru.knowyourandroid.R.layout
 import itis.kpfu.ru.knowyourandroid.R.string
 import itis.kpfu.ru.knowyourandroid.model.User
-import itis.kpfu.ru.knowyourandroid.UserProvider
+import itis.kpfu.ru.knowyourandroid.model.providers.UserProvider
 import kotlinx.android.synthetic.main.activity_sign_up.btn_sign_up
 import kotlinx.android.synthetic.main.activity_sign_up.container
 import kotlinx.android.synthetic.main.activity_sign_up.et_email
