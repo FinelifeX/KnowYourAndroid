@@ -13,9 +13,11 @@ class ThemeViewHolder(itemView: View) : GroupViewHolder(itemView) {
 
     override fun expand() {
         itemView.iv_header_theme.setImageResource(R.drawable.ic_arrow_up)
+        itemView.tv_header_theme.maxLines = 5
     }
 
     override fun collapse() {
         itemView.iv_header_theme.setImageResource(R.drawable.ic_arrow_down)
+        itemView.tv_header_theme.maxLines = 1
     }
 }
