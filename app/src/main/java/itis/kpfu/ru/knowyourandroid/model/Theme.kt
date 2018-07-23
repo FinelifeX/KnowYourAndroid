@@ -2,9 +2,11 @@ package itis.kpfu.ru.knowyourandroid.model
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.google.firebase.database.PropertyName
+import io.realm.RealmList
+import io.realm.RealmObject
 
-data class Theme(val name : String = "", val lessons : List<Lesson> = emptyList()) : Parcelable {
+open class Theme(var title: String = "themeTitle", var lessons: RealmList<Lesson> = RealmList()) : RealmObject(),
+        Parcelable {
 
     constructor(parcel: Parcel) : this(
             parcel.readString(),
@@ -12,7 +14,7 @@ data class Theme(val name : String = "", val lessons : List<Lesson> = emptyList(
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(name)
+        parcel.writeString(title)
         parcel.writeTypedList(lessons)
     }
 

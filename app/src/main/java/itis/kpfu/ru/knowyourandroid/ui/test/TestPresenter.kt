@@ -20,4 +20,8 @@ class TestPresenter: MvpPresenter<TestView>() {
     fun setTestInfo(test: Test){
         viewState.testInfo(test)
     }
+
+    fun errorNoData(){
+        viewState.errorNoData()
+    }
 }

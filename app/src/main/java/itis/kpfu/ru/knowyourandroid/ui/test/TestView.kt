@@ -8,4 +8,6 @@ interface TestView: MvpView {
     fun testData()
 
     fun testInfo(test: Test)
+
+    fun errorNoData()
 }

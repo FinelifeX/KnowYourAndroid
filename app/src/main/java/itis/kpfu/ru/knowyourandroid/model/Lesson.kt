@@ -2,11 +2,11 @@ package itis.kpfu.ru.knowyourandroid.model
 
 import android.os.Parcel
 import android.os.Parcelable
-import java.util.ArrayList
+import io.realm.RealmList
+import io.realm.RealmObject
 
-data class Lesson(val name : String = "LessonName", var content : String = "LessonText", val
-imgReferences :
-List<String> = ArrayList<String>()) : Parcelable {
+open class Lesson(var name : String = "LessonName", var content : String = "LessonText",
+        var imgReferences: RealmList<String> = RealmList()): RealmObject(), Parcelable {
 
     constructor(parcel: Parcel) : this(
             parcel.readString(),
