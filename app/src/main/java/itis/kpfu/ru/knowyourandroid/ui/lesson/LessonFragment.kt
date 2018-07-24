@@ -15,10 +15,9 @@ import itis.kpfu.ru.knowyourandroid.ui.theme.ThemeListFragment
 import itis.kpfu.ru.knowyourandroid.utils.IS_LAST_TAG
 import itis.kpfu.ru.knowyourandroid.utils.LESSON_NAME_TAG
 import itis.kpfu.ru.knowyourandroid.utils.THEME_NAME_TAG
-import kotlinx.android.synthetic.main.activity_drawer.toolbar
+import kotlinx.android.synthetic.main.activity_drawer.*
 import kotlinx.android.synthetic.main.fragment_lesson.btn_back
 import kotlinx.android.synthetic.main.fragment_lesson.iv_lesson
-import kotlinx.android.synthetic.main.fragment_lesson.progress_bar
 import kotlinx.android.synthetic.main.fragment_lesson.tv_lesson_content
 
 class LessonFragment : MvpAppCompatFragment(), LessonView {

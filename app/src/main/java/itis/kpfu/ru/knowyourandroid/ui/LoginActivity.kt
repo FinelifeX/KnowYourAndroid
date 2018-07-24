@@ -10,7 +10,6 @@ import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
-import android.view.WindowManager
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.AuthUI.IdpConfig
 import com.google.firebase.auth.FirebaseAuth

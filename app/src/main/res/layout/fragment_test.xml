@@ -114,7 +114,7 @@
         tools:visibility="visible" />
 
     <ProgressBar
-        android:id="@+id/progress_bar"
+        android:id="@+id/progress_bar_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />

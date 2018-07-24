@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
+import itis.kpfu.ru.knowyourandroid.R
 import itis.kpfu.ru.knowyourandroid.R.layout
 import itis.kpfu.ru.knowyourandroid.model.HandbookMethod
 import itis.kpfu.ru.knowyourandroid.utils.CLASS_POSITION_TAG
+import kotlinx.android.synthetic.main.activity_drawer.*
 import kotlinx.android.synthetic.main.fragment_list.rv_list
 
 class HandbookMethodListFragment : MvpAppCompatFragment(), HandbookMethodListView {

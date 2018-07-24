@@ -81,7 +81,6 @@ class DrawerActivity : MvpAppCompatActivity(), NavigationView.OnNavigationItemSe
                 LoginActivity.start(this)
             }
             nav_methods -> {
-                toolbar.title = resources.getString(R.string.nav_methods)
                 supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.container, HandbookClassListFragment.newInstance())
@@ -92,7 +91,6 @@ class DrawerActivity : MvpAppCompatActivity(), NavigationView.OnNavigationItemSe
                 //TODO settings
             }
             nav_stat -> {
-                toolbar.title = resources.getString(R.string.nav_statistics)
                 supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.container, StatisticsFragment.newInstance())
@@ -100,7 +98,6 @@ class DrawerActivity : MvpAppCompatActivity(), NavigationView.OnNavigationItemSe
                         .commit()
             }
             nav_themes -> {
-                toolbar.title = resources.getString(R.string.nav_themes)
                 supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.container, ThemeListFragment.newInstance())
