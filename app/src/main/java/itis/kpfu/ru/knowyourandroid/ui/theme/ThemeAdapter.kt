@@ -31,6 +31,7 @@ class ThemeAdapter(groups: List<ThemeGroup>, val activity: FragmentActivity?) :
         holder.itemView.setOnClickListener {
             activity!!.supportFragmentManager.beginTransaction()
                     .replace(R.id.container, LessonFragment.newInstance(lesson.name, group.title, group.items.size, childIndex))
+                    .addToBackStack("LessonFragmentOf" + lesson.name)
                     .commit()
         }
     }

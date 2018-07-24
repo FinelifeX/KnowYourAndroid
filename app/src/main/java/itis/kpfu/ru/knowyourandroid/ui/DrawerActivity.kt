@@ -85,6 +85,7 @@ class DrawerActivity : MvpAppCompatActivity(), NavigationView.OnNavigationItemSe
                 supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.container, HandbookClassListFragment.newInstance())
+                        .addToBackStack("ClassListFragment")
                         .commit()
             }
             nav_settings -> {
@@ -95,6 +96,7 @@ class DrawerActivity : MvpAppCompatActivity(), NavigationView.OnNavigationItemSe
                 supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.container, StatisticsFragment.newInstance())
+                        .addToBackStack("StatisticsFragment")
                         .commit()
             }
             nav_themes -> {
@@ -102,6 +104,7 @@ class DrawerActivity : MvpAppCompatActivity(), NavigationView.OnNavigationItemSe
                 supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.container, ThemeListFragment.newInstance())
+                        .addToBackStack("ThemeListFragment")
                         .commit()
             }
         }
