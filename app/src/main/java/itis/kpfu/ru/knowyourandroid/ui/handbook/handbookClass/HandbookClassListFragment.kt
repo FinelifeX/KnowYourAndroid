@@ -39,10 +39,10 @@ class HandbookClassListFragment : MvpAppCompatFragment(),
     override fun showDetails(position: Int) {
         activity?.supportFragmentManager
                 ?.beginTransaction()
+                ?.addToBackStack("Handbook Methods")
                 ?.replace(R.id.container,
                         HandbookMethodListFragment.newInstance(
                                 position))
-                ?.addToBackStack("MethodList")
                 ?.commit()
     }
 
