@@ -9,8 +9,12 @@ open class Theme(var title: String = "themeTitle", var lessons: RealmList<Lesson
         Parcelable {
 
     constructor(parcel: Parcel) : this(
-            parcel.readString(),
-            parcel.createTypedArrayList(Lesson)) {
+            parcel.readString()) {
+        val realmList: RealmList<Lesson> = RealmList()
+        for (lesson in parcel.createTypedArrayList(Lesson)) {
+            realmList.add(lesson)
+        }
+        this.lessons = realmList
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

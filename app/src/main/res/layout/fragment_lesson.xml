@@ -1,49 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="12dp">
+    android:orientation="vertical"
+    android:padding="@dimen/padding_medium">
 
     <ImageView
         android:id="@+id/iv_lesson"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:contentDescription="@string/lesson_image"
         android:src="@mipmap/ic_launcher"
         android:visibility="invisible"
-        tools:visibility="visible"
-        android:contentDescription="@string/lesson_image" />
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/tv_lesson_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:textSize="30sp"
-        android:visibility="invisible"
-        tools:visibility="visible"
+        android:layout_marginTop="@dimen/margin_medium"
         android:textColor="@color/colorBlack"
-        tools:text="akjffffffffffffffffffffffffffffffffffffffffaklfjaklfjalfjaljf"/>
+        android:textSize="@dimen/text_xlarge"
+        android:visibility="invisible"
+        tools:text="akjffffffffffffffffffffffffffffffffffffffffaklfjaklfjalfjaljf"
+        tools:visibility="visible" />
 
     <Button
         android:id="@+id/btn_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/margin_medium"
         android:background="@color/green"
-        android:textColor="@android:color/white"
         android:padding="8dp"
-        android:textSize="20sp"
         android:text="@string/back_to_list"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text.18"
         android:visibility="invisible"
-        tools:visibility="visible"
-        android:layout_marginTop="12dp"/>
+        tools:visibility="visible" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_medium" />
 </LinearLayout>

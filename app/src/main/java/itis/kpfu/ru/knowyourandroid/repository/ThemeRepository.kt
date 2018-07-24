@@ -21,24 +21,24 @@ object ThemeRepository {
             FirebaseDatabase.getInstance().reference
                     .child(THEMES_REFERENCE)
                     .addValueEventListener(object : ValueEventListener {
-                override fun onCancelled(p0: DatabaseError) {
-                    Log.d("ERROR", "ERROR IN $THEMES_REFERENCE")
-                }
 
-                override fun onDataChange(p0: DataSnapshot) {
-                    var themeName: String
-                    for (theme in p0.children) {
-                        themeName = theme.key.toString()
-                        val lessonList = mutableListOf<Lesson>()
-                        for (lesson in theme.children) {
-                            lessonList.add(Lesson(lesson.key.toString()))
+                        override fun onCancelled(p0: DatabaseError) {
+                            Log.d("ERROR", "ERROR IN $THEMES_REFERENCE")
                         }
-                        themes.add(ThemeGroup(themeName, lessonList))
-                        service.notifyOnDataLoaded(themes)
-                    }
-                }
-            })
-        }
-        else service.notifyOnDataLoaded(themes)
+
+                        override fun onDataChange(p0: DataSnapshot) {
+                            var themeName: String
+                            for (theme in p0.children) {
+                                themeName = theme.key.toString()
+                                val lessonList = mutableListOf<Lesson>()
+                                for (lesson in theme.children) {
+                                    lessonList.add(Lesson(lesson.key.toString()))
+                                }
+                                themes.add(ThemeGroup(themeName, lessonList))
+                                service.notifyOnDataLoaded(themes)
+                            }
+                        }
+                    })
+        } else service.notifyOnDataLoaded(themes)
     }
 }

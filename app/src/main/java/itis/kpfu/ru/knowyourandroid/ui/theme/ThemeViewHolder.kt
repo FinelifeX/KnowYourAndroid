@@ -7,6 +7,7 @@ import itis.kpfu.ru.knowyourandroid.R
 import kotlinx.android.synthetic.main.item_theme_view.view.*
 
 class ThemeViewHolder(itemView: View) : GroupViewHolder(itemView) {
+
     fun setThemeTitle(group: ExpandableGroup<*>) {
         itemView.tv_header_theme.text = group.title
     }

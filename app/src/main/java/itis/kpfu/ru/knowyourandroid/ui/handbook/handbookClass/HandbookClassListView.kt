@@ -6,7 +6,7 @@ import itis.kpfu.ru.knowyourandroid.model.HandbookClass
 /**
  * Created by Ilya Zakharchenko on 21.07.2018.
  */
-interface HandbookClassListView: MvpView {
+interface HandbookClassListView : MvpView {
 
     fun changeLoadingState(isLoading: Boolean)
 

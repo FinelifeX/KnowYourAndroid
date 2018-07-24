@@ -10,7 +10,8 @@ import itis.kpfu.ru.knowyourandroid.service.HandbookService
  */
 
 @InjectViewState
-class HandbookClassPresenter(private val service: HandbookService = HandbookService): MvpPresenter<HandbookClassListView>() {
+class HandbookClassPresenter(private val service: HandbookService = HandbookService) :
+        MvpPresenter<HandbookClassListView>() {
 
 
     fun onItemClick(position: Int) {

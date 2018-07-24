@@ -11,7 +11,8 @@ import itis.kpfu.ru.knowyourandroid.ui.lesson.LessonFragment
 import kotlinx.android.synthetic.main.activity_drawer.*
 import kotlinx.android.synthetic.main.item_theme_view.view.*
 
-class ThemeAdapter(groups: List<ThemeGroup>, val activity: FragmentActivity?) : ExpandableRecyclerViewAdapter<ThemeViewHolder, LessonViewHolder>(groups) {
+class ThemeAdapter(groups: List<ThemeGroup>, val activity: FragmentActivity?) :
+        ExpandableRecyclerViewAdapter<ThemeViewHolder, LessonViewHolder>(groups) {
 
     override fun onCreateGroupViewHolder(parent: ViewGroup, viewType: Int): ThemeViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_theme_view, parent, false)
@@ -23,12 +24,13 @@ class ThemeAdapter(groups: List<ThemeGroup>, val activity: FragmentActivity?) : 
         return LessonViewHolder(view)
     }
 
-    override fun onBindChildViewHolder(holder: LessonViewHolder, flatPosition: Int, group: ExpandableGroup<*>, childIndex: Int) {
+    override fun onBindChildViewHolder(holder: LessonViewHolder, flatPosition: Int, group: ExpandableGroup<*>,
+            childIndex: Int) {
         val lesson = (group as ThemeGroup).items[childIndex]
         holder.setLessonTitle(lesson)
         holder.itemView.setOnClickListener {
             activity!!.supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, LessonFragment.newInstance(lesson.name, group.title))
+                    .replace(R.id.container, LessonFragment.newInstance(lesson.name, group.title, group.items.size, childIndex))
                     .commit()
         }
     }
@@ -36,5 +38,4 @@ class ThemeAdapter(groups: List<ThemeGroup>, val activity: FragmentActivity?) : 
     override fun onBindGroupViewHolder(holder: ThemeViewHolder, flatPosition: Int, group: ExpandableGroup<*>) {
         holder.setThemeTitle(group)
     }
-
 }

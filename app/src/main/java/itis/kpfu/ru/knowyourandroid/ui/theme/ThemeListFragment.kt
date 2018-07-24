@@ -1,31 +1,23 @@
 package itis.kpfu.ru.knowyourandroid.ui.theme
 
 import android.os.Bundle
-import android.support.v4.app.FragmentActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import itis.kpfu.ru.knowyourandroid.R
-import itis.kpfu.ru.knowyourandroid.model.Lesson
 import itis.kpfu.ru.knowyourandroid.model.ThemeGroup
 import itis.kpfu.ru.knowyourandroid.ui.theme.mvp.ThemeListPresenter
 import itis.kpfu.ru.knowyourandroid.ui.theme.mvp.ThemeListView
-import itis.kpfu.ru.knowyourandroid.utils.THEMES_REFERENCE
 import kotlinx.android.synthetic.main.fragment_list.*
-import kotlinx.android.synthetic.main.fragment_list.view.*
 
 class ThemeListFragment : MvpAppCompatFragment(), ThemeListView {
 
     companion object {
-        fun newInstance() : ThemeListFragment {
+
+        fun newInstance(): ThemeListFragment {
             return ThemeListFragment()
         }
     }
@@ -47,8 +39,7 @@ class ThemeListFragment : MvpAppCompatFragment(), ThemeListView {
         if (isLoading) {
             rv_list.visibility = View.GONE
             progress_bar.visibility = View.VISIBLE
-        }
-        else {
+        } else {
             rv_list.visibility = View.VISIBLE
             progress_bar.visibility = View.GONE
         }

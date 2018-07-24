@@ -35,8 +35,7 @@ object HandbookRepository {
                     }
                 }
             })
-        }
-        else service.notifyDataLoaded(classes)
+        } else service.notifyDataLoaded(classes)
     }
 
     fun getClass(position: Int) = classes[position]

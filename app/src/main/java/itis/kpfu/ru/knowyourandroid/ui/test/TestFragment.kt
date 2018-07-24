@@ -12,19 +12,9 @@ import itis.kpfu.ru.knowyourandroid.R
 import itis.kpfu.ru.knowyourandroid.model.Test
 import itis.kpfu.ru.knowyourandroid.model.providers.UserProvider
 import itis.kpfu.ru.knowyourandroid.ui.theme.ThemeListFragment
-import itis.kpfu.ru.knowyourandroid.utils.POINTS_FOR_CORRECT
-import itis.kpfu.ru.knowyourandroid.utils.POINTS_FOR_INCORRECT
-import itis.kpfu.ru.knowyourandroid.utils.POINTS_FOR_SKIP
-import itis.kpfu.ru.knowyourandroid.utils.THEME_NAME_TAG
+import itis.kpfu.ru.knowyourandroid.utils.*
 import kotlinx.android.synthetic.main.activity_drawer.toolbar
-import kotlinx.android.synthetic.main.fragment_test.btn_answer1
-import kotlinx.android.synthetic.main.fragment_test.btn_answer2
-import kotlinx.android.synthetic.main.fragment_test.btn_answer3
-import kotlinx.android.synthetic.main.fragment_test.btn_answer4
-import kotlinx.android.synthetic.main.fragment_test.btn_skip
-import kotlinx.android.synthetic.main.fragment_test.progress_bar
-import kotlinx.android.synthetic.main.fragment_test.tv_number
-import kotlinx.android.synthetic.main.fragment_test.tv_question
+import kotlinx.android.synthetic.main.fragment_test.*
 
 class TestFragment : MvpAppCompatFragment(), TestView {
 
@@ -104,7 +94,7 @@ class TestFragment : MvpAppCompatFragment(), TestView {
         }
     }
 
-    private fun setQuestionData(){
+    private fun setQuestionData() {
         val number = "${questionNumber + 1}/${test.questionList.size}"
         tv_number.text = number
         tv_question.text = test.questionList[questionNumber]?.content
