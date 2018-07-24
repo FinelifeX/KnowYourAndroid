@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp"
+    android:padding="12dp"
     android:clickable="true"
     android:focusable="true">
 
@@ -25,10 +25,11 @@
         android:id="@+id/iv_header_lesson"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:scaleX="0.5"
         android:scaleY="0.5"
-        android:src="@mipmap/ic_arrow_l_to_r"
 
+        android:src="@mipmap/ic_arrow_l_to_r"
         app:layout_constraintBottom_toBottomOf="@+id/tv_header_lesson"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toRightOf="@id/tv_header_lesson"
