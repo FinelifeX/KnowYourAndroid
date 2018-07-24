@@ -6,7 +6,6 @@ import com.arellomobile.mvp.MvpPresenter
 import itis.kpfu.ru.knowyourandroid.model.ThemeGroup
 import itis.kpfu.ru.knowyourandroid.service.ThemeService
 
-
 /*
 *** Created by Bulat Murtazin on 23.07.2018 ***
 */

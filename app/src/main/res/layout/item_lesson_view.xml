@@ -1,31 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="12dp"
     android:clickable="true"
-    android:focusable="true">
+    android:focusable="true"
+    android:orientation="vertical"
+    android:paddingEnd="@dimen/padding_12"
+    android:paddingStart="@dimen/padding_large"
+    android:paddingTop="@dimen/padding_small">
 
     <TextView
         android:id="@+id/tv_header_lesson"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lesson header"
-        android:maxLines="1"
         android:ellipsize="end"
+        android:maxLines="1"
         android:maxWidth="300dp"
-        android:textSize="20sp"
         android:textColor="@android:color/black"
+        android:textSize="@dimen/text_large"
+        app:layout_constraintBaseline_toBaselineOf="@id/iv_header_lesson"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBaseline_toBaselineOf="@id/iv_header_lesson"/>
+        tools:text="Lesson header" />
 
     <ImageView
         android:id="@+id/iv_header_lesson"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/margin_small"
         android:scaleX="0.5"
         android:scaleY="0.5"
         android:src="@mipmap/ic_arrow_l_to_r"
