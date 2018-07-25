@@ -10,17 +10,13 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import itis.kpfu.ru.knowyourandroid.R
 import itis.kpfu.ru.knowyourandroid.R.id.nav_stat
 import itis.kpfu.ru.knowyourandroid.R.layout
-import itis.kpfu.ru.knowyourandroid.R.string.nav_statistics
 import itis.kpfu.ru.knowyourandroid.model.User
 import itis.kpfu.ru.knowyourandroid.utils.LESSONS_NUM
 import kotlinx.android.synthetic.main.activity_drawer.*
-import kotlinx.android.synthetic.main.fragment_list.rv_list
+import kotlinx.android.synthetic.main.fragment_list.*
 import kotlinx.android.synthetic.main.fragment_list.view.progress_bar_list
 import kotlinx.android.synthetic.main.fragment_list.view.rv_list
-import kotlinx.android.synthetic.main.fragment_statistics.included_list
-import kotlinx.android.synthetic.main.fragment_statistics.pb_lessons
-import kotlinx.android.synthetic.main.fragment_statistics.tv_exp_num
-import kotlinx.android.synthetic.main.fragment_statistics.tv_lessons_num
+import kotlinx.android.synthetic.main.fragment_statistics.*
 
 class StatisticsFragment : MvpAppCompatFragment(), StatisticsView {
 

@@ -8,17 +8,14 @@ import io.realm.RealmList
 import itis.kpfu.ru.knowyourandroid.model.Answer
 import itis.kpfu.ru.knowyourandroid.model.Question
 import itis.kpfu.ru.knowyourandroid.model.Test
-import itis.kpfu.ru.knowyourandroid.repository.RepositoryProvider
+import itis.kpfu.ru.knowyourandroid.repository.TestRepository
 import itis.kpfu.ru.knowyourandroid.ui.test.TestPresenter
 import itis.kpfu.ru.knowyourandroid.utils.QUESTION_REFERENCE
 import java.util.Arrays
 
-class TestService {
+object TestService {
 
-    companion object {
-
-        val database: FirebaseDatabase = FirebaseDatabase.getInstance()
-    }
+    val database: FirebaseDatabase = FirebaseDatabase.getInstance()
 
     fun getTest(themeName: String, testPresenter: TestPresenter) {
         val databaseReference = database.getReference("$QUESTION_REFERENCE/$themeName")
@@ -39,10 +36,37 @@ class TestService {
                         }
                         list.add(Question(hm["content"] as String, answerList))
                     }
-                    RepositoryProvider.getTestRepository().setTest(Test(themeName, list), testPresenter)
+                    TestRepository.setTest(Test(themeName, list), testPresenter)
                 } else {
                     testPresenter.errorNoData()
                 }
+            }
+
+            override fun onCancelled(p0: DatabaseError) {
+            }
+        })
+    }
+
+    fun getTest(themeName: String) {
+        val databaseReference = database.getReference("$QUESTION_REFERENCE/$themeName")
+        databaseReference.addValueEventListener(object : ValueEventListener {
+
+            override fun onDataChange(p0: DataSnapshot) {
+
+                val test = p0.value as ArrayList<*>
+                val list: RealmList<Question> = RealmList()
+                for (testVal in test) {
+                    val hm = testVal as HashMap<*, *>
+                    val answerStringList = Arrays.asList(hm["answerList"]).toString()
+                            .replace("[", "").replace("]", "")
+                            .split(",").toTypedArray()
+                    val answerList: RealmList<Answer> = RealmList()
+                    for ((i, answer) in answerStringList.withIndex()) {
+                        answerList.add(Answer(answer, i == 0))
+                    }
+                    list.add(Question(hm["content"] as String, answerList))
+                }
+                TestRepository.setTest(Test(themeName, list))
             }
 
             override fun onCancelled(p0: DatabaseError) {

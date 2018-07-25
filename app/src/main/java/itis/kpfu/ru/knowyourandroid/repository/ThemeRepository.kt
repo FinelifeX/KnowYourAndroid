@@ -41,4 +41,35 @@ object ThemeRepository {
                     })
         } else service.notifyOnDataLoaded(themes)
     }
+
+    fun loadThemes(next: (List<ThemeGroup>) -> Unit) {
+        if (themes.isEmpty()) {
+            FirebaseDatabase.getInstance().reference
+                    .child(THEMES_REFERENCE)
+                    .addValueEventListener(object : ValueEventListener {
+
+                        override fun onCancelled(p0: DatabaseError) {
+                            Log.d("ERROR", "ERROR IN $THEMES_REFERENCE")
+                        }
+
+                        override fun onDataChange(p0: DataSnapshot) {
+                            var themeName: String
+                            for (theme in p0.children) {
+                                themeName = theme.key.toString()
+                                val lessonList = mutableListOf<Lesson>()
+                                for (lesson in theme.children) {
+                                    val value = lesson.getValue(Lesson::class.java)
+                                    if (value != null) {
+                                        lessonList.add(value)
+                                    } else {
+                                        lessonList.add(Lesson(lesson.key.toString()))
+                                    }
+                                }
+                                themes.add(ThemeGroup(themeName, lessonList))
+                            }
+                            next(themes)
+                        }
+                    })
+        } else next(themes)
+    }
 }

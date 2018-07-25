@@ -2,11 +2,15 @@ package itis.kpfu.ru.knowyourandroid.repository
 
 import io.realm.Realm
 import itis.kpfu.ru.knowyourandroid.model.Test
-import itis.kpfu.ru.knowyourandroid.repository.cache.RewriteCache
-import itis.kpfu.ru.knowyourandroid.service.ServiceProvider
+import itis.kpfu.ru.knowyourandroid.repository.cache.Cache
+import itis.kpfu.ru.knowyourandroid.service.TestService
 import itis.kpfu.ru.knowyourandroid.ui.test.TestPresenter
 
-class TestRepository {
+object TestRepository {
+
+    fun getTest(themeName: String) {
+        TestService.getTest(themeName)
+    }
 
     fun getTest(themeName: String, testPresenter: TestPresenter) {
         Realm.getDefaultInstance()
@@ -16,13 +20,15 @@ class TestRepository {
                             .findFirst()
                             ?.let { testPresenter.setTestInfo(it) }
                 }
-        ServiceProvider.getTestService().getTest(themeName, testPresenter)
     }
 
     fun setTest(test: Test?, testPresenter: TestPresenter) {
         test?.let {
-            RewriteCache(it::class.java).rewrite(test)
             testPresenter.setTestInfo(test)
         }
+    }
+
+    fun setTest(test: Test?) {
+        test?.let { Cache.addToCache(it) }
     }
 }

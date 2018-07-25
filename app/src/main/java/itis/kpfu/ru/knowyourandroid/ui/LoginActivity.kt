@@ -17,20 +17,9 @@ import itis.kpfu.ru.knowyourandroid.R.layout
 import itis.kpfu.ru.knowyourandroid.R.string
 import itis.kpfu.ru.knowyourandroid.model.User
 import itis.kpfu.ru.knowyourandroid.model.providers.UserProvider
-import itis.kpfu.ru.knowyourandroid.utils.EMAIL
-import itis.kpfu.ru.knowyourandroid.utils.EMAIL_REGEX
-import itis.kpfu.ru.knowyourandroid.utils.RC_GOOGLE
-import itis.kpfu.ru.knowyourandroid.utils.SoftKeyboardHelper
-import kotlinx.android.synthetic.main.activity_login.btn_sign_in
-import kotlinx.android.synthetic.main.activity_login.btn_sign_in_google
-import kotlinx.android.synthetic.main.activity_login.btn_sign_up
-import kotlinx.android.synthetic.main.activity_login.container
-import kotlinx.android.synthetic.main.activity_login.et_email
-import kotlinx.android.synthetic.main.activity_login.et_password
-import kotlinx.android.synthetic.main.activity_login.it_email
-import kotlinx.android.synthetic.main.activity_login.it_password
-import kotlinx.android.synthetic.main.activity_login.progress_bar
-import kotlinx.android.synthetic.main.activity_login.tv_reset_password
+import itis.kpfu.ru.knowyourandroid.repository.RepositoryProvider
+import itis.kpfu.ru.knowyourandroid.utils.*
+import kotlinx.android.synthetic.main.activity_login.*
 
 /**
  * A login screen that offers login via email/password.
@@ -99,9 +88,7 @@ class LoginActivity : Activity() {
             auth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
 
                 if (it.isSuccessful) {
-                    UserProvider.provideUser().addOnCompleteListener {
-                        DrawerActivity.start(this)
-                    }
+                    loadData(this, null)
                 } else {
                     Snackbar.make(
                             container,
@@ -143,15 +130,7 @@ class LoginActivity : Activity() {
             when (requestCode) {
                 RC_GOOGLE -> {
                     setLoadingState(true)
-                    UserProvider.provideUser().addOnCompleteListener {
-                        val user = UserProvider.getCurrentUser()
-                        if (user == null) {
-                            UserProvider.createUser(
-                                    User(auth.uid, auth.currentUser?.displayName,
-                                            avatarUrl = auth.currentUser?.photoUrl.toString()))
-                        }
-                        DrawerActivity.start(this@LoginActivity)
-                    }
+                    loadData(this, auth)
                 }
             }
     }
@@ -164,5 +143,9 @@ class LoginActivity : Activity() {
             progress_bar.visibility = View.GONE
             container.visibility = View.VISIBLE
         }
+    }
+
+    private fun loadData(context: Context, auth: FirebaseAuth?){
+        RepositoryProvider.provideData(context, auth)
     }
 }
