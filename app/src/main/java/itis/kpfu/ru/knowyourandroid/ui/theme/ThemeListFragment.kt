@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import itis.kpfu.ru.knowyourandroid.R
+import itis.kpfu.ru.knowyourandroid.R.id.nav_themes
 import itis.kpfu.ru.knowyourandroid.model.ThemeGroup
 import itis.kpfu.ru.knowyourandroid.ui.theme.mvp.ThemeListPresenter
 import itis.kpfu.ru.knowyourandroid.ui.theme.mvp.ThemeListView
+import kotlinx.android.synthetic.main.activity_drawer.*
 import kotlinx.android.synthetic.main.fragment_list.*
 
 class ThemeListFragment : MvpAppCompatFragment(), ThemeListView {
@@ -27,6 +29,8 @@ class ThemeListFragment : MvpAppCompatFragment(), ThemeListView {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         presenter.init()
+        this.activity?.toolbar?.title = resources.getString(R.string.nav_themes)
+        this.activity?.nav_view?.setCheckedItem(nav_themes)
         return inflater.inflate(R.layout.fragment_list, container, false)
     }
 
@@ -38,10 +42,10 @@ class ThemeListFragment : MvpAppCompatFragment(), ThemeListView {
     override fun changeLoadingState(isLoading: Boolean) {
         if (isLoading) {
             rv_list.visibility = View.GONE
-            progress_bar.visibility = View.VISIBLE
+            progress_bar_list.visibility = View.VISIBLE
         } else {
             rv_list.visibility = View.VISIBLE
-            progress_bar.visibility = View.GONE
+            progress_bar_list.visibility = View.GONE
         }
     }
 }

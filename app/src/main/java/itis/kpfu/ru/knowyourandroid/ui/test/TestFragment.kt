@@ -12,8 +12,11 @@ import itis.kpfu.ru.knowyourandroid.R
 import itis.kpfu.ru.knowyourandroid.model.Test
 import itis.kpfu.ru.knowyourandroid.model.providers.UserProvider
 import itis.kpfu.ru.knowyourandroid.ui.theme.ThemeListFragment
-import itis.kpfu.ru.knowyourandroid.utils.*
-import kotlinx.android.synthetic.main.activity_drawer.toolbar
+import itis.kpfu.ru.knowyourandroid.utils.POINTS_FOR_CORRECT
+import itis.kpfu.ru.knowyourandroid.utils.POINTS_FOR_INCORRECT
+import itis.kpfu.ru.knowyourandroid.utils.POINTS_FOR_SKIP
+import itis.kpfu.ru.knowyourandroid.utils.THEME_NAME_TAG
+import kotlinx.android.synthetic.main.activity_drawer.*
 import kotlinx.android.synthetic.main.fragment_test.*
 
 class TestFragment : MvpAppCompatFragment(), TestView {
@@ -118,7 +121,7 @@ class TestFragment : MvpAppCompatFragment(), TestView {
             earnedPoints += POINTS_FOR_SKIP
             toNextQuestion()
         }
-        progress_bar.visibility = View.GONE
+        progress_bar_test.visibility = View.GONE
         tv_number.visibility = View.VISIBLE
         tv_question.visibility = View.VISIBLE
         for (btn in buttonList) {
