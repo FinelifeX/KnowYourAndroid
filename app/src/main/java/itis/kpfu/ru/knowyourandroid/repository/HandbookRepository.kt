@@ -6,6 +6,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import itis.kpfu.ru.knowyourandroid.model.HandbookClass
 import itis.kpfu.ru.knowyourandroid.model.HandbookMethod
+import itis.kpfu.ru.knowyourandroid.repository.cache.Cache
 import itis.kpfu.ru.knowyourandroid.service.HandbookService
 
 /**
@@ -36,6 +37,29 @@ object HandbookRepository {
                 }
             })
         } else service.notifyDataLoaded(classes)
+    }
+
+    fun loadClasses(next: () -> Unit) {
+        if (classes.isEmpty()) {
+            FirebaseDatabase.getInstance().getReference("classes").addValueEventListener(object : ValueEventListener {
+
+                override fun onCancelled(p0: DatabaseError) {
+                }
+
+                override fun onDataChange(p0: DataSnapshot) {
+                    for (dataSnapshot in p0.children) {
+                        dataSnapshot.getValue(HandbookClass::class.java)?.let { it ->
+                            for (methodSnapshot in dataSnapshot.child("methods").children) {
+                                methodSnapshot.getValue(HandbookMethod::class.java)?.let(it.methodList::add)
+                            }
+                            classes.add(it)
+                        }
+                    }
+                    Cache.addToCache(classes)
+                    next()
+                }
+            })
+        } else next()
     }
 
     fun getClass(position: Int) = classes[position]

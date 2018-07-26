@@ -57,7 +57,7 @@ class LessonFragment : MvpAppCompatFragment(), LessonView {
     override fun initView(lesson: Lesson) {
         onDataLoaded()
         tv_lesson_content.text = lesson.content
-        if (isLast){
+        if (isLast) {
             btn_back.text = resources.getText(R.string.start_test)
         }
         btn_back.setOnClickListener {
@@ -86,7 +86,7 @@ class LessonFragment : MvpAppCompatFragment(), LessonView {
     }
 
     override fun lessonData() {
-        presenter.getLessonInfo(themeName, lessonName)
+        presenter.getLessonInfo(lessonName)
     }
 
     private fun onDataLoaded() {

@@ -12,10 +12,7 @@ import itis.kpfu.ru.knowyourandroid.R
 import itis.kpfu.ru.knowyourandroid.model.Test
 import itis.kpfu.ru.knowyourandroid.model.providers.UserProvider
 import itis.kpfu.ru.knowyourandroid.ui.theme.ThemeListFragment
-import itis.kpfu.ru.knowyourandroid.utils.POINTS_FOR_CORRECT
-import itis.kpfu.ru.knowyourandroid.utils.POINTS_FOR_INCORRECT
-import itis.kpfu.ru.knowyourandroid.utils.POINTS_FOR_SKIP
-import itis.kpfu.ru.knowyourandroid.utils.THEME_NAME_TAG
+import itis.kpfu.ru.knowyourandroid.utils.*
 import kotlinx.android.synthetic.main.activity_drawer.*
 import kotlinx.android.synthetic.main.fragment_test.*
 
