@@ -3,20 +3,25 @@ package itis.kpfu.ru.knowyourandroid.repository.cache
 import io.realm.Realm
 import io.realm.RealmObject
 
-class RewriteCache(val tClass: Class<out RealmObject>) {
+object Cache {
 
-    fun rewrite(list: List<RealmObject>){
+    fun clear() {
         Realm.getDefaultInstance()
                 .executeTransaction { realm ->
-                    realm.delete(tClass)
+                    realm.deleteAll()
+                }
+    }
+
+    fun addToCache(list: List<RealmObject>) {
+        Realm.getDefaultInstance()
+                .executeTransaction { realm ->
                     realm.insert(list)
                 }
     }
 
-    fun rewrite(elem: RealmObject){
+    fun addToCache(elem: RealmObject) {
         Realm.getDefaultInstance()
                 .executeTransaction { realm ->
-                    realm.delete(tClass)
                     realm.insert(elem)
                 }
     }

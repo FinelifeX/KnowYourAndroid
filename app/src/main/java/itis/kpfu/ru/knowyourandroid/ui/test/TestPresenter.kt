@@ -3,7 +3,7 @@ package itis.kpfu.ru.knowyourandroid.ui.test
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import itis.kpfu.ru.knowyourandroid.model.Test
-import itis.kpfu.ru.knowyourandroid.repository.RepositoryProvider
+import itis.kpfu.ru.knowyourandroid.repository.TestRepository
 
 @InjectViewState
 class TestPresenter: MvpPresenter<TestView>() {
@@ -14,7 +14,7 @@ class TestPresenter: MvpPresenter<TestView>() {
     }
 
     fun loadData(themeName: String){
-        RepositoryProvider.getTestRepository().getTest(themeName, this)
+       TestRepository.getTest(themeName, this)
     }
 
     fun setTestInfo(test: Test){
