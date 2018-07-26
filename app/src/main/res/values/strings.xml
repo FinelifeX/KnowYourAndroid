@@ -39,4 +39,6 @@
     <string name="lesson_image">Lesson image</string>
     <string name="back_to_list">Back to list</string>
     <string name="start_test">Start test</string>
+    <string name="settings_colors">Colors</string>
+    <string name="current_color">RED</string>
 </resources>

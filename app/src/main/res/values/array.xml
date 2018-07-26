@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="themeColors">
+        <item>Red</item>
+        <item>Default</item>
+    </array>
+</resources>

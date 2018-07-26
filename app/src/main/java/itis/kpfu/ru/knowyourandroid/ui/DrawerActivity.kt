@@ -2,6 +2,7 @@ package itis.kpfu.ru.knowyourandroid.ui
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.content.ContextCompat
@@ -21,7 +22,10 @@ import itis.kpfu.ru.knowyourandroid.R.string
 import itis.kpfu.ru.knowyourandroid.ui.theme.ThemeListFragment
 import itis.kpfu.ru.knowyourandroid.model.providers.UserProvider
 import itis.kpfu.ru.knowyourandroid.ui.handbook.handbookClass.HandbookClassListFragment
+import itis.kpfu.ru.knowyourandroid.ui.settings.SettingsFragment
 import itis.kpfu.ru.knowyourandroid.ui.statistics.StatisticsFragment
+import itis.kpfu.ru.knowyourandroid.utils.APP_SETTINGS
+import itis.kpfu.ru.knowyourandroid.utils.APP_THEME
 import kotlinx.android.synthetic.main.activity_drawer.*
 import kotlinx.android.synthetic.main.nav_header_drawer.view.*
 
@@ -31,8 +35,15 @@ class DrawerActivity : MvpAppCompatActivity(), NavigationView.OnNavigationItemSe
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val shPref = getSharedPreferences(APP_SETTINGS, Context.MODE_PRIVATE)
+        val currentColorTheme = shPref.getString(APP_THEME, "Default")
+        when (currentColorTheme) {
+            "Default" -> setTheme(R.style.AppThemeDefault)
+            "Red" -> setTheme(R.style.AppThemeRed)
+        }
+
         setContentView(activity_drawer)
-        toolbar.title = resources.getString(R.string.nav_statistics)
         setSupportActionBar(toolbar)
 
         val toggle = ActionBarDrawerToggle(
@@ -88,7 +99,11 @@ class DrawerActivity : MvpAppCompatActivity(), NavigationView.OnNavigationItemSe
                         .commit()
             }
             nav_settings -> {
-                //TODO settings
+                supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.container, SettingsFragment.newInstance())
+                        .addToBackStack("SettingsFragment")
+                        .commit()
             }
             nav_stat -> {
                 supportFragmentManager
