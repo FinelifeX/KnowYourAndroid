@@ -1,5 +1,7 @@
 package itis.kpfu.ru.knowyourandroid.utils
 
+import itis.kpfu.ru.knowyourandroid.R
+
 /**
  * Created by Ilya Zakharchenko on 12.07.2018.
  */
@@ -20,3 +22,7 @@ const val LESSONS_NUM = 100
 const val POINTS_FOR_SKIP = -50
 const val POINTS_FOR_CORRECT = 100
 const val POINTS_FOR_INCORRECT = -100
+
+const val APP_SETTINGS = "APPLICATION_SETTINGS"
+
+const val APP_THEME = "APPLICATION_THEME"
